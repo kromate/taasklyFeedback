@@ -22,7 +22,7 @@
 			</div>
 
 
-			<button class="btn-primary_flat w-full mt-2" :disabled="authCredentienalsForm.loading.value || valid_email" type="submit">
+			<button class="btn-primary w-full mt-2" :disabled="authCredentienalsForm.loading.value || valid_email" type="submit">
 				<span v-if="!authCredentienalsForm.loading.value">Continue</span>
 				<Spinner v-else />
 			</button>
@@ -32,7 +32,7 @@
 				We sent a link to <b>{{ authCredentienalsForm.email.value }}</b> <br>
 				To reset your password, please go to your email and click the link.
 			</p>
-			<nuxt-link to="/auth/login" class="btn-primary_flat w-full mt-2" :disabled="authCredentienalsForm.loading.value || valid_email" type="submit">
+			<nuxt-link to="/auth/login" class="btn-primary w-full mt-2" :disabled="authCredentienalsForm.loading.value || valid_email" type="submit">
 				<span v-if="!authCredentienalsForm.loading.value">Continue</span>
 				<Spinner v-else />
 			</nuxt-link>

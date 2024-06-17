@@ -10,7 +10,7 @@
 			<div class="field">
 				<input id="email" v-model="credentienals.email.value" placeholder="Enter a valid Email address" type="email" class="input-field" required>
 			</div>
-			<button class="btn-primary_flat w-full mt-2" :disabled="passwordlessLoginLoading || disabled" type="submit" @click="send_email">
+			<button class="btn-primary w-full mt-2" :disabled="passwordlessLoginLoading || disabled" type="submit" @click="send_email">
 				<span v-if="!passwordlessLoginLoading"> Send link to email</span>
 				<Spinner v-else />
 			</button>

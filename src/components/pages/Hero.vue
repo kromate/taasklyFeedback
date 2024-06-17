@@ -7,9 +7,9 @@
 			<p class="md:text-2xl text-lg font-medium md:font-normal text-dark mb-8 ">
 				Seamlessly collect, analyze, and act on customer feedback to enhance your products and services. Boost satisfaction, loyalty, and performance with our intuitive feedback solution.
 			</p>
-			<button class="bg-black text-white md:py-4 py-3 md:px-10 px-8 rounded-md mb-4 md:text-xl">
+			<nuxt-link to="/auth/login" class="bg-black text-white md:py-4 py-3 md:px-10 px-8 rounded-md mb-4 md:text-xl">
 				Get Started
-			</button>
+			</nuxt-link>
 		</section>
 
 		<section class="flex center items-start h-full">
