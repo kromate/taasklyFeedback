@@ -1,5 +1,5 @@
 <template>
-	<div class="layout-body polkdot">
+	<div class="layout-body polkadot">
 		<section class="flex min-h-screen h-full w-full container items-center justify-center">
 			<slot />
 		</section>
