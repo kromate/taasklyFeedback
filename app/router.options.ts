@@ -12,13 +12,12 @@ export default <RouterOptions>{
 
     if (subdomain.value) {
       const templateRoute = _routes.filter((i) => i.path.includes('/template/:siteId'))
-console.log(templateRoute)
+
       const templateRouteMapped = templateRoute.map((i) => ({
         ...i,
         path: i.path === '/template/:siteId()' ? i.path.replace('/template/:siteId()', '/') : i.path.replace('/template/:siteId()/', '/')
       }))
 
-      // console.log(templateRouteMapped)
       return templateRouteMapped
     }
   }

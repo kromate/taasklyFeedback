@@ -1,5 +1,5 @@
 <template>
-	<div class="layout-body">
+	<div class="layout-body polkdot">
 		<section class="flex min-h-screen h-full w-full container items-center justify-center">
 			<slot />
 		</section>
@@ -20,8 +20,5 @@
 	background-position: center;
 }
 
-.layout-body {
-	background: var(--light);
 
-}
 </style>

@@ -32,7 +32,7 @@ export const functions = getFunctions(useFirebase(), 'us-central1')
 
 
 
-if (import.meta.env.DEV) {
+if (!import.meta.env.DEV) {
   connectAuthEmulator(auth, 'http://localhost:9099', { disableWarnings: true })
   connectFirestoreEmulator(db, 'localhost', 8181)
   connectFunctionsEmulator(functions, 'localhost', 5001)

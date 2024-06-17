@@ -9,14 +9,13 @@
 
 <script setup lang="ts">
 import { useSignin } from '@/composables/auth/auth'
-import { useUser } from '@/composables/auth/user'
 
-const { clearUser } = useUser()
+
 
 const { signOut } = useSignin()
 
 definePageMeta({
-	layout: 'default',
+	layout: 'dashboard',
 	middleware: 'is-authenticated'
 })
 </script>

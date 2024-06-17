@@ -1,67 +1,47 @@
 <template>
-	<div class="bg-secondary">
-		<div class="relative isolate overflow-hidden bg-gradient-to-b from-indigo-100/20">
-			<div class="mx-auto max-w-7xl pb-24 pt-10 sm:pb-32 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:px-8 lg:py-40">
-				<div class="px-6 lg:px-0 lg:pt-4">
-					<div class="mx-auto max-w-2xl">
-						<div class="max-w-lg flex flex-col items-start">
-							<div class="p-4 rounded-full border-2 border-primary shadow w-auto">
-								<Rocket class="text-primary md:h-10 md:w-10" />
-							</div>
+	<main class=" h-full container grid md:grid-cols-2 gap-12 items-center  md:py-32 py-10">
+		<section class="text-start px-4">
+			<h1 class="md:text-7xl text-5xl font-extrabold mb-4 pathway leading-[1.2]">
+				Feedback Simplified
+			</h1>
+			<p class="md:text-2xl text-lg font-medium md:font-normal text-dark mb-8 ">
+				Seamlessly collect, analyze, and act on customer feedback to enhance your products and services. Boost satisfaction, loyalty, and performance with our intuitive feedback solution.
+			</p>
+			<button class="bg-black text-white md:py-4 py-3 md:px-10 px-8 rounded-md mb-4 md:text-xl">
+				Get Started
+			</button>
+		</section>
 
-
-							<h1 class="mt-10 text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-								Less Set-Up, <br> More Shipping
-							</h1>
-							<p class="mt-6 text-xl leading-8 text-gray-600">
-								A modern, feature-rich starter template for Nuxt 3 projects, integrating
-								<span class="text-[#FFA611] font-bold">Firebase</span>,
-								<span class="text-[#f67373] font-bold">Lucide Icons</span>,
-								<span class="text-[#10b981] font-bold">Radix Vue</span>, and
-								<span class="text-indigo-600 font-bold">TailwindCSS</span>.
-							</p>
-
-							<div class="mt-10 flex items-center gap-x-6">
-								<a href="https://github.com/kromate/nuxt3-starter-template" target="_blank" class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Get Started</a>
-								<a href="https://github.com/kromate/nuxt3-starter-template" target="_blank" class="text-sm font-semibold leading-6 text-gray-900">View on GitHub <span aria-hidden="true">→</span></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="mt-20 sm:mt-24 md:mx-auto md:max-w-2xl lg:mx-0 lg:mt-0 lg:w-screen">
-					<div class="absolute inset-y-0 right-1/2 -z-10 -mr-10 w-[200%] skew-x-[-30deg] bg-[#ffffffe8] shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 md:-mr-20 lg:-mr-36" aria-hidden="true" />
-					<div class="shadow-lg md:rounded-3xl">
-						<div class="bg-indigo-500 [clip-path:inset(0)] md:[clip-path:inset(0_round_theme(borderRadius.3xl))]">
-							<div class="absolute -inset-y-px left-1/2 -z-10 ml-10 w-[200%] skew-x-[-30deg] bg-indigo-100 opacity-20 ring-1 ring-inset ring-white md:ml-20 lg:ml-36" aria-hidden="true" />
-							<div class="relative px-6 pt-8 sm:pt-16 md:pl-16 md:pr-0">
-								<div class="mx-auto max-w-2xl md:mx-0 md:max-w-none">
-									<div class="w-screen overflow-hidden rounded-tl-xl bg-gray-900">
-										<div class="flex bg-gray-800/40 ring-1 ring-white/5">
-											<div class="-mb-px flex text-sm font-medium leading-6 text-gray-400">
-												<a href="https://kromate.dev/" target="_blank" class="border-b border-r underline border-b-white/20 border-r-white/10 bg-white/5 px-4 py-2 text-white">
-													Kromate.vue
-												</a>
-												<a href="https://taaskly.xyz/?ref=nuxt3-template" target="_blank" class="border-r border-gray-600/10 px-4 py-2">
-													Taaskly.vue
-												</a>
-											</div>
-										</div>
-										<div class="px-6 pb-14 pt-6">
-											<PagesPreCode />
-										</div>
-									</div>
-									<div class="pointer-events-none absolute inset-0 ring-1 ring-inset ring-black/10 md:rounded-3xl" aria-hidden="true" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+		<section class="flex center items-start h-full">
+			<div class="flex flex-col max-w-lg w-full gap-4 max-h-[410px] overflow-auto hide-scrollbar px-4 md:p-5 ">
+				<DashboardUpvoteCard v-for="sample in demo_feedback" :key="sample.id" :data="sample" />
 			</div>
-		</div>
-	</div>
+		</section>
+	</main>
 </template>
 
-<script setup>
+<script lang='ts' setup>
 
-import { Rocket } from 'lucide-vue-next'
+const demo_feedback = [
+	{ id: 'a1b2c3d4e', title: 'Google Calendar integration', description: 'I would be willing to pay extra for a calendar integration', upvotes: 123 },
+	{ id: 'f5g6h7i8j', title: 'Mobile App Enhancements', description: 'The mobile app needs to be more responsive and user-friendly.', upvotes: 85 },
+	{ id: 'k9l0m1n2o', title: 'Additional Language Support', description: 'Please add support for more languages, especially Spanish and French.', upvotes: 78 },
+	{ id: 'p3q4r5s6t', title: 'Dark Mode', description: 'A dark mode option would be really helpful for working at night.', upvotes: 65 },
+	{ id: 'u7v8w9x0y', title: 'Customizable Notifications', description: 'Allow users to customize the type and frequency of notifications they receive.', upvotes: 53 },
+	{ id: 'z1a2b3c4d', title: 'Integration with Slack', description: 'Integration with Slack for team collaboration would be fantastic.', upvotes: 49 },
+	{ id: 'e5f6g7h8i', title: 'Improved Analytics', description: 'Provide more detailed analytics and reporting features.', upvotes: 42 },
+	{ id: 'j9k0l1m2n', title: 'User Tutorials', description: 'Add more tutorials and guides to help new users get started.', upvotes: 38 },
+	{ id: 'o3p4q5r6s', title: 'Enhanced Security', description: 'Focus on improving security features to protect user data.', upvotes: 34 },
+	{ id: 't7u8v9w0x', title: 'Performance Optimization', description: 'Optimize performance to ensure smooth and fast user experience.', upvotes: 29 },
+	{ id: 'y1z2a3b4c', title: 'Customizable Dashboards', description: 'Allow users to customize their dashboards with widgets they find useful.', upvotes: 27 },
+	{ id: 'd5e6f7g8h', title: 'Integration with Microsoft Teams', description: 'Integration with Microsoft Teams would be very beneficial.', upvotes: 25 },
+	{ id: 'i9j0k1l2m', title: 'Export Data', description: 'Provide options to export data in various formats for offline analysis.', upvotes: 22 },
+	{ id: 'n3o4p5q6r', title: '24/7 Customer Support', description: 'Offer 24/7 customer support for users in different time zones.', upvotes: 18 },
+	{ id: 's7t8u9v0w', title: 'API Access', description: 'Provide API access for developers to create custom integrations.', upvotes: 15 },
+	{ id: 'x1y2z3a4b', title: 'Social Media Sharing', description: 'Allow users to share feedback results directly on social media.', upvotes: 13 },
+	{ id: 'c5d6e7f8g', title: 'In-App Chat Support', description: 'Add an in-app chat support feature for real-time assistance.', upvotes: 10 },
+	{ id: 'h9i0j1k2l', title: 'Multiple User Roles', description: 'Support for multiple user roles and permissions.', upvotes: 9 },
+	{ id: 'm3n4o5p6q', title: 'Advanced Search', description: 'Improve search functionality with advanced filtering options.', upvotes: 7 },
+	{ id: 'r7s8t9u0v', title: 'Automated Reports', description: 'Set up automated reports to be sent to email at regular intervals.', upvotes: 5 }
+]
 </script>

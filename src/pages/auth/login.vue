@@ -1,6 +1,9 @@
 <template>
 	<div class="auth-box">
-		<!-- <img src="@/assets/images/main/c_shop.svg" alt="logo" width="90" height="90"> -->
+		<nuxt-link to="/">
+			<img src="/lt2.svg" alt="logo">
+		</nuxt-link>
+
 		<h1 class="auth-title">
 			Welcome Home
 		</h1>
@@ -51,7 +54,7 @@
 					Forgot Password?
 				</nuxt-link>
 			</div>
-			<button class="btn-primary_flat w-full mt-2" :disabled="authCredentienalsForm.loading.value || disabled" type="submit">
+			<button class="btn-primary w-full mt-2" :disabled="authCredentienalsForm.loading.value || disabled" type="submit">
 				<span v-if="!authCredentienalsForm.loading.value">Login</span>
 				<Spinner v-else />
 			</button>

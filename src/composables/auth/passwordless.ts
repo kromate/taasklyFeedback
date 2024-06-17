@@ -56,15 +56,10 @@ export const usePasswordlessSignin = () => {
 
             const user = result.user as User as any
             await useUser().setUser(user as User)
-			const token = await user?.auth.currentUser.getIdTokenResult()
-			const hasProfile = token?.claims?.hasUpdatedProfile
-
-
-			if (!hasProfile) await useRouter().push('/auth/profile')
 
 			const redirectUrl = useUser().redirectUrl.value
 			useUser().redirectUrl.value = null
-			await useRouter().push(redirectUrl ?? '/main/business')
+			await useRouter().push(redirectUrl ?? '/dashboard')
 			useAuthModal().closeAll()
 
 			authCredentienalsForm.loading.value = false

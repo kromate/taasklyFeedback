@@ -5,6 +5,8 @@ import { useAlert } from '@/composables/core/notification'
 import { firebaseErrorMessage } from '@/firebase/utils'
 import { useUser } from '@/composables/auth/user'
 
+declare const window: any
+
 export const usePhoneAuth = () => {
     const router = useRouter()
     const step = ref(1)
@@ -36,18 +38,12 @@ export const usePhoneAuth = () => {
         authCredentienalsForm.loading.value = true
         try {
             const otpCode = otp.value.join('')
-            console.log(otpCode)
             const userCredential = await confirmationResultRef.value?.confirm(otpCode)
-            console.log(userCredential)
             await useUser().setUser(userCredential.user)
-            const token = await userCredential.user.getIdTokenResult()
-            const hasProfile = token?.claims?.hasUpdatedProfile
-console.log(hasProfile)
-            if (!hasProfile) await router.push('/auth/profile')
+
             const redirectUrl = useUser().redirectUrl.value
             useUser().redirectUrl.value = null
-            console.log(redirectUrl)
-            console.log('/main/business')
+
             await router.push(redirectUrl ?? '/main/business')
 
             authCredentienalsForm.loading.value = false

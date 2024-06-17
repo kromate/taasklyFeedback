@@ -1,6 +1,8 @@
 <template>
 	<div class="auth-box">
-		<!-- <img src="@/assets/images/main/c_shop.svg" alt="logo" width="90" height="90"> -->
+		<nuxt-link to="/">
+			<img src="/lt2.svg" alt="logo">
+		</nuxt-link>
 		<h1 class="auth-title">
 			Hello stranger
 		</h1>
@@ -25,7 +27,7 @@
 				<section class="flex w-full justify-between">
 					<label for="password">Password</label>
 					<button class="font-medium text-primary underline disabled:text-grey_four disabled:cursor-not-allowed text-sm" :disabled="authCredentienalsForm.loading.value || valid_email" type="button" @click="send_email">
-						login with email link
+						register with email link
 					</button>
 				</section>
 
@@ -50,8 +52,8 @@
 					Forgot Password?
 				</nuxt-link>
 			</div>
-			<button class="btn-primary_flat w-full mt-2" :disabled="authCredentienalsForm.loading.value || disabled" type="submit">
-				<span v-if="!authCredentienalsForm.loading.value">Login</span>
+			<button class="btn-primary w-full " :disabled="authCredentienalsForm.loading.value || disabled" type="submit">
+				<span v-if="!authCredentienalsForm.loading.value">Register</span>
 				<Spinner v-else />
 			</button>
 		</form>

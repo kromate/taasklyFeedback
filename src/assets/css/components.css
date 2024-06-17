@@ -48,7 +48,21 @@
     .auth-title {
         @apply font-light text-2xl text-center flex w-full items-center justify-center relative text-dark;
     }
+        .btn {
+            @apply rounded-md px-8 py-3 flex justify-center items-center font-medium disabled:bg-gray-500 disabled:text-dark disabled:cursor-not-allowed  box-border  border border-secondary hover:shadow-[4px_3.5px_0px_0px_#000] transite
+        }
 
+        .btn-primary {
+        @apply btn bg-light;
+    }
+
+    .btn-primary-inverse {
+        @apply btn bg-light text-primary;
+    }
+        .btn_shadow {
+        box-shadow: 4.286px 3.482px 0px 0px #000;
+    }
+    
     .auth-form {
         @apply flex flex-col gap-4 overflow-y-auto w-full items-center;
     }

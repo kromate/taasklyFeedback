@@ -16,13 +16,10 @@ export const useEmailAndPassword = () => {
     try {
         const userCredential = await signInWithEmailAndPassword(authRef, authCredentienalsForm.email.value, authCredentienalsForm.passord.value)
         await useUser().setUser(userCredential.user)
-        const token = await userCredential.user.getIdTokenResult()
-        const hasProfile = token?.claims?.hasUpdatedProfile
 
-        if (!hasProfile) await router.push('/auth/profile')
         const redirectUrl = useUser().redirectUrl.value
         useUser().redirectUrl.value = null
-        await router.push(redirectUrl ?? '/main/business')
+        await router.push(redirectUrl ?? '/dashboard')
 
         authCredentienalsForm.loading.value = false
     } catch (err: any) {
@@ -37,13 +34,9 @@ export const useEmailAndPassword = () => {
         const userCredential = await createUserWithEmailAndPassword(authRef, authCredentienalsForm.email.value, authCredentienalsForm.passord.value)
 
         await useUser().setUser(userCredential.user)
-        const token = await userCredential.user.getIdTokenResult()
-        const hasProfile = token?.claims?.hasUpdatedProfile
-
-        if (!hasProfile) await router.push('/auth/profile')
         const redirectUrl = useUser().redirectUrl.value
         useUser().redirectUrl.value = null
-        await router.push(redirectUrl ?? '/main/business')
+        await router.push(redirectUrl ?? '/dashboard')
 
         authCredentienalsForm.loading.value = false
     } catch (err: any) {
