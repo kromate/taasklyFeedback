@@ -23,16 +23,16 @@ export default {
             },
             {
                 name: 'description',
-                content: 'A modern, feature-rich starter template for Nuxt 3 projects, integrating Firebase, Lucide Icons, Radix Vue, and TailwindCSS.'
+                content: 'Seamlessly collect, analyze, and act on customer feedback to enhance your products and services. Boost satisfaction, loyalty, and performance with our intuitive feedback solution.'
             },
             {
                 name: 'twitter:title',
                 content: 'Feedback - Simplified Feedback, Amplified Business'
             },
-            { name: 'twitter:image', content: 'https://nuxt3-starter-template-five.vercel.app/og.png' },
+            { name: 'twitter:image', content: 'https://feedback.taaskly.site/og.png' },
             {
                 name: 'twitter:description',
-                content: 'A modern, feature-rich starter template for Nuxt 3 projects, integrating Firebase, Lucide Icons, Radix Vue, and TailwindCSS.'
+                content: 'Seamlessly collect, analyze, and act on customer feedback to enhance your products and services. Boost satisfaction, loyalty, and performance with our intuitive feedback solution.'
             },
             { name: 'twitter:card', content: 'summary_large_image' },
             { name: 'twitter:site', content: '@kromate_24' },
@@ -43,14 +43,14 @@ export default {
             },
             { name: 'google-site-verification', content: 'tWttF6w3RHPlNPm5u7KSRgh4lgkRUZ2Bwl6QzECjY18' },
             { property: 'og:type', content: 'website' },
-            { property: 'og:url', content: 'https://Feedback.xyz/' },
-            { property: 'og:image', content: 'https://nuxt3-starter-template-five.vercel.app/og.png' },
-            { property: 'og:image:secure_url', content: 'https://nuxt3-starter-template-five.vercel.app/og.png' },
+            { property: 'og:url', content: 'https://feedback.taaskly.site/' },
+            { property: 'og:image', content: 'https://feedback.taaskly.site/og.png' },
+            { property: 'og:image:secure_url', content: 'https://feedback.taaskly.site/og.png' },
             { property: 'og:image:type', content: 'image/png' },
             { property: 'og:site_name', content: 'Feedback' },
             {
                 property: 'og:description',
-                content: 'A modern, feature-rich starter template for Nuxt 3 projects, integrating Firebase, Lucide Icons, Radix Vue, and TailwindCSS.'
+                content: 'Seamlessly collect, analyze, and act on customer feedback to enhance your products and services. Boost satisfaction, loyalty, and performance with our intuitive feedback solution.'
             },
 
             { name: 'format-detection', content: 'telephone=no' }
