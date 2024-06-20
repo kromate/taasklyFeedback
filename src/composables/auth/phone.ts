@@ -14,10 +14,15 @@ export const usePhoneAuth = () => {
     const confirmationResultRef = ref()
     const init_reCAPTCHA = () => {
         window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
-            size: 'invisible'
-            // callback: (response) => {
-            //     signInWIthPhone()
-            // }
+            size: 'normal',
+            callback: (response) => {
+                console.log(response)
+                signInWIthPhone()
+            },
+
+            'expired-callback': () => {
+                useAlert().openAlert({ type: 'ERROR', msg: 'reCAPTCHA failed. Try again.' })
+            }
         }, authRef)
     }
 

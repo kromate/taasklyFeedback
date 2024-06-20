@@ -42,7 +42,7 @@
 					class="input-field"
 					required
 				>
-				<icon name="eye" class="w-6 absolute top-[53%] right-4" @click="toggleShow" />
+				<EyeIcon class="w-5 h-5 absolute top-[53%] right-4" @click="toggleShow" />
 			</div>
 			<div class="flex justify-between items-center text-xs w-full">
 				<label for="remember" class="mb-0">
@@ -67,7 +67,7 @@
 			<div class="border-line border-b h-1 flex-1" />
 		</div>
 		<button class="btn_flat w-full bg-dark text-light" :disabled="loading" type="button" @click="googleSignin()">
-			<span v-if="!loading" class="flex items-center gap-3"> <icon name="google" class="w-4" /> 	Continue with Google</span>
+			<span v-if="!loading" class="flex items-center gap-3">	Continue with Google</span>
 			<Spinner v-else />
 		</button>
 
@@ -80,10 +80,10 @@
 </template>
 
 <script setup lang="ts">
+import { EyeIcon } from 'lucide-vue-next'
 import { useSignin, authCredentienalsForm } from '@/composables/auth/auth'
 import { usePasswordlessSignin } from '@/composables/auth/passwordless'
 import { useEmailAndPassword } from '@/composables/auth/email_password'
-
 
 
 const authType = ref('email')

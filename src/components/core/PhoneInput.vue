@@ -21,7 +21,7 @@
 				<DropdownMenuTrigger as="button" :disabled="disabled" class="cursor-pointer flex items-center gap-2.5 p-1.5 px-2 pl-4 py-0 bg-transparent border-r border-neut3">
 					<span class="text-xl">{{ selectedCountry.flag }}</span>
 					<span class="truncate">{{ selectedCountry.dial_code }}</span>
-					<icon name="down" :class="['ml-1 w-4 duration-300', open ? 'rotate-180' : '']" />
+					<ChevronDown name="down" :class="['ml-1 w-4 h-4 duration-300', open ? 'rotate-180' : '']" />
 				</DropdownMenuTrigger>
 
 				<DropdownMenuContent class="bg-white  border border-dark z-20 px-8 py-6  absolute top-[2rem] -left-[60px] w-[325px] rounded overflow-hidden max-h-96 min-h-28">
@@ -49,7 +49,9 @@
 </template>
 <script setup lang="ts">
 import { DropdownMenuRoot, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from 'radix-vue'
+import { ChevronDown } from 'lucide-vue-next'
 import countries from '@/composables/helpers/countries'
+
 
 interface Country {
   name: string;

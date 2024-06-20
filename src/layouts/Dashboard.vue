@@ -1,7 +1,7 @@
 <template>
 	<div class=" min-h-screen">
 		<section class="flex flex-col">
-			<HeroNav />
+			<DashboardNav />
 			<SubMenu />
 			<slot />
 		</section>
@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import HeroNav from '@/components/layouts/HeroNav.vue'
+import DashboardNav from '@/components/layouts/DashboardNav.vue'
 import SubMenu from '@/components/layouts/SubMenu.vue'
 
 </script>
