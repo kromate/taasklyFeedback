@@ -1,45 +1,24 @@
 
-import { getSingleFirestoreSubDocument } from '@/firebase/firestore/fetch'
-import { getFirestoreCollectionWithWhereQuery } from '@/firebase/firestore/query'
+import { getSingleFirestoreDocument } from '@/firebase/firestore/fetch'
 import { useAlert } from '@/composables/core/notification'
 
 
 
-const currentCustomerId = ref('')
-const customerIdDetails = ref({} as Record<string, any>)
-const customerOrders = ref([] as Record<string, any>[])
+export const useFetchUserBoardById = () => {
+	const board = ref({} as any)
+	const loading = ref(false)
 
-export const useFetchCustomerById = () => {
-    const selectedBusiness = ''
-    const loading = ref(false)
-
-     const business_id = selectedBusiness
-    const fetchCustomerById = async (loadOrders = false) => {
+		const fetchUserBoardById = async (id:string) => {
+		if (board.value.length > 0) return
         loading.value = true
         try {
-            const customer = ref()
-                await getSingleFirestoreSubDocument('businesses', business_id, 'customers', currentCustomerId.value, customer)
-            if (customer) customerIdDetails.value = customer.value
-            else customerIdDetails.value = {}
-            if (loadOrders) await fetchCustomerOrdersById()
-            loading.value = false
-        } catch (e: any) {
-            loading.value = false
-            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: '' })
-        }
-    }
-
-    const fetchCustomerOrdersById = async () => {
-        loading.value = true
-        try {
-            await getFirestoreCollectionWithWhereQuery('orders', customerOrders, { name: 'business_id', operator: '==', value: business_id }, { name: 'customer_id', operator: '==', value: currentCustomerId.value })
-            loading.value = false
-        } catch (e: any) {
-            loading.value = false
-            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: '' })
-        }
-    }
-
-    return { fetchCustomerById, customerIdDetails, loading, currentCustomerId, fetchCustomerOrdersById, customerOrders }
+			await getSingleFirestoreDocument('boards', id, board)
+			loading.value = false
+		} catch (e: any) {
+			loading.value = false
+			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}` })
+		}
+	}
+	return { loading, board, fetchUserBoardById }
 }
 

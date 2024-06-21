@@ -5,9 +5,10 @@
 		</nuxt-link>
 
 
-		<button v-if="isLoggedIn" class="btn-primary" @click="useSignin().signOut()">
+		<!-- <button  class="btn-primary" @click="useSignin().signOut()">
 			logout
-		</button>
+		</button> -->
+		<AvatarDropdown v-if="isLoggedIn" />
 		<nuxt-link v-else to="/auth/login" class="btn-primary">
 			Login
 		</nuxt-link>
@@ -15,8 +16,9 @@
 </template>
 
 <script setup lang="ts">
-import { useSignin } from '@/composables/auth/auth'
+
 import { useUser } from '@/composables/auth/user'
+import AvatarDropdown from '@/components/core/AvatarDropdown.vue'
 
 
 

@@ -1,11 +1,11 @@
 import { v4 as uuidv4 } from 'uuid'
-import { setFirestoreDocument } from '@/firebase/firestore/create'
+import { setFirestoreSubDocument } from '@/firebase/firestore/create'
 import { useAlert } from '@/composables/core/notification'
 import { useUser } from '@/composables/auth/user'
 import { convertObjWithRefToObj } from '@/composables/utils/formatter'
 
 
-const createBoardForm = {
+const createFeedbackForm = {
     title: ref(''),
     desc: ref(''),
     created_at: ref(new Date().toISOString()),
@@ -14,21 +14,21 @@ const createBoardForm = {
 
 
 const resetForm = () => {
-    createBoardForm.title.value = ''
-    createBoardForm.desc.value = ''
+    createFeedbackForm.title.value = ''
+    createFeedbackForm.desc.value = ''
 }
 
 
-export const useCreateBoard = () => {
+export const useCreateFeedback = () => {
     const { id: user_id, username, user, isLoggedIn, userProfile } = useUser()
     const loading = ref(false)
 
 
-    const create = async () => {
+    const create = async (board_id:string) => {
             const id = uuidv4()
         loading.value = true
         const sentData = {
-            ...convertObjWithRefToObj(createBoardForm),
+            ...convertObjWithRefToObj(createFeedbackForm),
             id,
             user: {
                 id: user_id.value,
@@ -42,11 +42,11 @@ export const useCreateBoard = () => {
 
         try {
             loading.value = true
-            const res = await setFirestoreDocument('boards', id, sentData)
+            const res = await setFirestoreSubDocument('boards', board_id, 'feedbacks', id, sentData)
 
             loading.value = false
-            useAlert().openAlert({ type: 'SUCCESS', msg: 'Board Created successfully' })
-            useRouter().push(`/dashboard/${id}`)
+            useAlert().openAlert({ type: 'SUCCESS', msg: 'Feedback Created successfully' })
+            useRouter().push(`/b/${board_id}/${id}`)
             resetForm()
         } catch (e: any) {
             loading.value = false
@@ -54,5 +54,5 @@ export const useCreateBoard = () => {
         }
     }
 
-    return { create, loading, createBoardForm }
+    return { create, loading, createFeedbackForm }
 }

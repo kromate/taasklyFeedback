@@ -4,7 +4,7 @@ import app from './app_config'
 
 export default {
   devtools: { enabled: false },
-  modules: ['@vueuse/nuxt', '@nuxtjs/tailwindcss'],
+  modules: ['@vueuse/nuxt', '@nuxtjs/tailwindcss', 'nuxt-security'],
 
   dir: {
     layouts: './src/layouts',
@@ -19,6 +19,11 @@ export default {
     css: ['@/assets/css/main.css'],
   alias: {
     '@': './src'
+  },
+  security: {
+    headers: {
+      crossOriginEmbedderPolicy: process.env.NODE_ENV === 'development' ? 'unsafe-none' : 'require-corp'
+    }
   },
   vite: {
 

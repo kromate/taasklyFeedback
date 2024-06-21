@@ -1,5 +1,5 @@
 <template>
-	<article class="flex gap-2 items-center justify-between border-[1.5px] border-dark bg-light p-4 rounded-md w-full transite cursor-pointer hover:btn_shadow">
+	<article class="flex gap-2 items-center justify-between border-[1.5px] border-dark bg-light p-4 rounded-md w-full  transite cursor-pointer hover:btn_shadow">
 		<div class="flex flex-col gap-2">
 			<h1 class="font-semibold text-xl">
 				{{ data.title }}

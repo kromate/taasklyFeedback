@@ -60,6 +60,7 @@
         @apply btn bg-light text-primary;
     }
         .btn_shadow {
+            @apply transite;
         box-shadow: 4.286px 3.482px 0px 0px #000;
     }
     

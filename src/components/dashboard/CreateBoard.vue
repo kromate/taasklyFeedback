@@ -7,7 +7,7 @@
 			<label for="email">Board Title</label>
 			<input
 				id="title"
-				v-model="createReviewForm.title.value"
+				v-model="createBoardForm.title.value"
 				placeholder="Enter a Board title"
 				type="text"
 				class="input-field"
@@ -19,7 +19,7 @@
 			<label for="email">Board description</label>
 			<textarea
 				id="description"
-				v-model="createReviewForm.desc.value"
+				v-model="createBoardForm.desc.value"
 				placeholder="Enter a Board description (Optional)"
 				type="text"
 				class="input-textarea resize-none"
@@ -35,12 +35,12 @@
 </template>
 
 <script setup lang="ts">
-import Spinner from '../core/Spinner.vue'
+
 import { useCreateBoard } from '@/composables/board/create'
 
 
 
-const { create, createReviewForm, loading } = useCreateBoard()
+const { create, createBoardForm, loading } = useCreateBoard()
 </script>
 
 <style scoped>

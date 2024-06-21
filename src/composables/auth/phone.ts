@@ -16,7 +16,6 @@ export const usePhoneAuth = () => {
         window.recaptchaVerifier = new RecaptchaVerifier('recaptcha-container', {
             size: 'normal',
             callback: (response) => {
-                console.log(response)
                 signInWIthPhone()
             },
 
