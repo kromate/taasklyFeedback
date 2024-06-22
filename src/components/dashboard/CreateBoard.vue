@@ -16,7 +16,7 @@
 			>
 		</div>
 		<div class="field">
-			<label for="email">Board <data value=""></data>escription</label>
+			<label for="email">Board description</label>
 			<textarea
 				id="desc"
 				v-model="createBoardForm.desc.value"

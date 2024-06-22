@@ -1,8 +1,8 @@
 <template>
 	<div class="w-full">
 		<section v-if="!loading" class="flex flex-col w-full">
-			<h1 class="text-xl font-bold mb-4">
-				{{ boards.length }} Board
+			<h1 class="text-lg font-semibold mb-4">
+				{{ boards.length }} {{ boards.length === 1 ? 'Comment' : 'Comments' }}
 			</h1>
 			<div class="grid md:grid-cols-2 gap-4 w-full">
 				<nuxt-link v-for="board in boards" :key="board.id" :to="`/dashboard/${board.id}`" class="flex flex-col p-4 border border-dark w-full rounded shadow-md hover:btn_shadow">
