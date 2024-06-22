@@ -3,13 +3,14 @@
 import { getFirestoreSubCollection } from '@/firebase/firestore/fetch'
 import { useAlert } from '@/composables/core/notification'
 
+
+
+export const useFetchBoardFeedbacks = () => {
 	const feedbacks = ref([] as any)
 	const loading = ref(false)
 
-export const useFetchBoardFeedbacks = () => {
 	const fetchBoardFeedbacks = async (id: string) => {
-			if (process.client) return
-
+		if (feedbacks.value.length > 0) return
         loading.value = true
         try {
 			await getFirestoreSubCollection('boards', id, 'feedbacks', feedbacks)

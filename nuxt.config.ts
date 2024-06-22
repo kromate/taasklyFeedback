@@ -3,6 +3,7 @@ import eslintPlugin from 'vite-plugin-eslint'
 import app from './app_config'
 
 export default {
+  ssr: true,
   devtools: { enabled: false },
   modules: ['@vueuse/nuxt', '@nuxtjs/tailwindcss'],
 
