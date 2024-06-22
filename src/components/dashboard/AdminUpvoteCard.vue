@@ -5,7 +5,7 @@
 				{{ data.title }}
 			</h1>
 			<p>
-				{{ data.description }}
+				{{ data.desc }}
 			</p>
 		</div>
 		<div class="flex flex-col items-center justify-center border border-dark rounded-[4.5px] py-1 min-w-[50px]">
@@ -14,6 +14,12 @@
 				{{ data.upvotes }}
 			</p>
 		</div>
+		<footer v-if="showFooter" class="mt-auto">
+			<div class="flex items-center gap-1 mt-2">
+				<MessageSquare :size="20" />
+				<span>{{ data.comment_count || 0 }}</span>
+			</div>
+		</footer>
 	</article>
 </template>
 
@@ -22,12 +28,14 @@ import { ChevronUp } from 'lucide-vue-next'
 
 type feedbackType = {
     title: string
-    description: string
-    upvotes: number
+    desc: string
+	upvotes: number
+	comment_count?: number
     id: string
 }
 defineProps<{
-    data: feedbackType
+	data: feedbackType
+	showFooter?: boolean
 }>()
 
 

@@ -23,12 +23,12 @@
 					</div>
 				</h1>
 			</div>
-			<div class="max-w-2xl flex flex-col gap-4">
-				<span class="text-3xl font-bold">{{ 1 }}  Posts</span>
-				<div v-if="false" class="flex flex-col gap-4 w-full">
-					<DashboardAdminUpvoteCard v-for="sample in demo_feedback" :key="sample.id" :data="sample" />
+			<div v-if="!feedbackLoading" class="max-w-2xl flex flex-col gap-4">
+				<span class="text-3xl font-bold">{{ feedbacks.length }}  Posts</span>
+				<div v-if="feedbacks.length" class="flex flex-col gap-4 w-full">
+					<DashboardAdminUpvoteCard v-for="sample in feedbacks" :key="sample.id" :data="sample" />
 				</div>
-				<div class="flex flex-col text-center py-12">
+				<div v-else class="flex flex-col text-center py-12">
 					<PenLine :size="64" class="mx-auto" />
 					<h1 class="text-xl font-semibold">
 						No feedback yet
@@ -48,24 +48,33 @@ import { Copy, Undo2, MoveUpRight, PenLine } from 'lucide-vue-next'
 import { truncateString } from '@/composables/utils/formatter'
 import { useFetchUserBoardById } from '@/composables/board/id'
 import { useCopyToClipboard } from '@/composables/utils/share'
+import { useFetchBoardFeedbacks } from '@/composables/board/feedbacks/fetch'
+
+const { feedbacks, fetchBoardFeedbacks, loading: feedbackLoading } = useFetchBoardFeedbacks()
+const { board, fetchUserBoardById, loading } = useFetchUserBoardById()
+
+const id = useRoute().params.id as string
+
+fetchBoardFeedbacks(id)
+fetchUserBoardById(id)
 
 const host = computed(() => {
 	return location.host
 })
 const { copyData } = useCopyToClipboard()
-const { board, fetchUserBoardById, loading } = useFetchUserBoardById()
+
 
 const copyBoardLink = (id: string) => {
 	copyData({ info: `${host.value}/b/${id}`, msg: 'Link copied to clipboard' })
 }
 
-const id = useRoute().params.id as string
-fetchUserBoardById(id)
+
+
 
 const demo_feedback = [
-	{ id: 'a1b2c3d4e', title: 'Google Calendar integration', description: 'I would be willing to pay extra for a calendar integration', upvotes: 123 },
-	{ id: 'f5g6h7i8j', title: 'Mobile App Enhancements', description: 'The mobile app needs to be more responsive and user-friendly.', upvotes: 85 },
-	{ id: 'k9l0m1n2o', title: 'Additional Language Support', description: 'Please add support for more languages, especially Spanish and French.', upvotes: 78 }
+	{ id: 'a1b2c3d4e', title: 'Google Calendar integration', desc: 'I would be willing to pay extra for a calendar integration', upvotes: 123 },
+	{ id: 'f5g6h7i8j', title: 'Mobile App Enhancements', desc: 'The mobile app needs to be more responsive and user-friendly.', upvotes: 85 },
+	{ id: 'k9l0m1n2o', title: 'Additional Language Support', desc: 'Please add support for more languages, especially Spanish and French.', upvotes: 78 }
 ]
 
 

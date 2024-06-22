@@ -18,7 +18,7 @@
 		<div class="field">
 			<label for="email">Description</label>
 			<textarea
-				id="description"
+				id="desc"
 				v-model="createFeedbackForm.desc.value"
 				placeholder="Please add support for more languages, especially Spanish and French."
 				type="text"
@@ -35,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { useCreateFeedback } from '@/composables/board/feedback/create'
+import { useCreateFeedback } from '@/composables/board/feedbacks/create'
 
 const board_id = useRoute().params.id as string
 

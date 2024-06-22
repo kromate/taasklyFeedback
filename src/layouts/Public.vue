@@ -1,7 +1,8 @@
 <template>
 	<div class=" min-h-screen">
 		<section class="flex flex-col">
-			<header v-if="!loading" class="container flex items-center justify-between max-w-[1100px] py-4 md:px-0 px-4 bg-transparent">
+			<header v-if="!loading" class="container flex items-start gap-2  py-4 md:px-0 px-4 bg-transparent">
+				<Undo2 v-if="showBackBtn" class="border border-dark p-1 rounded-md cursor-pointer !min-w-[35px] !max-h-[35px] hover:btn_shadow transite " :size="35" @click="useRouter().push(`/b/${id}`)" />
 				<div class="flex flex-col">
 					<h1 class="text-3xl font-bold">
 						{{ board.title }}
@@ -22,8 +23,11 @@
 </template>
 
 <script setup lang="ts">
+import { Undo2 } from 'lucide-vue-next'
 import { useFetchUserBoardById } from '@/composables/board/id'
 
+
+const showBackBtn = computed(() => useRouter().currentRoute.value.name !== 'b-id')
 
 const { board, fetchUserBoardById, loading } = useFetchUserBoardById()
 const id = useRoute().params.id as string

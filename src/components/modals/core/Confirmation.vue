@@ -7,7 +7,7 @@
 
 	>
 		<p class="text-dark text-lg tracking-[0.1rem] text-center">
-			{{ description }}
+			{{ desc }}
 		</p>
 
 		<div class="grid grid-cols-2 gap-4 mt-6">
@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { useConfirmationModal } from '@/composables/core/confirmation'
 
-const { call_function, closeAlert, description, title, loading } = useConfirmationModal()
+const { call_function, closeAlert, desc, title, loading } = useConfirmationModal()
 
 </script>
 
