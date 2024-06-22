@@ -38,7 +38,8 @@ export const useCreateFeedback = () => {
             user_id: user_id.value,
             userProfile: userProfile.value,
             upvotes: 0,
-            comment_count: 0
+            comment_count: 0,
+            comment_ids: []
 
         }
 

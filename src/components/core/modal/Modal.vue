@@ -163,39 +163,5 @@ const closeBtnPressed = () => {
 	backdrop-filter: blur(1.5px);
 }
 
-.modal-enter-active,
-.modal-leave-active {
-	transition: all 0.23s linear;
-}
-.modal-enter-from,
-.modal-leave-to {
-	opacity: 0;
-	@media screen and (max-width: 640px) {
-		transform: translateY(500px);
-	}
-}
-.slide-enter-active,
-.slide-leave-active {
-	transition: all 0.25s ease;
-}
-.slide-enter-from,
-.slide-leave-to {
-	transform: translateX(-500px);
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-}
 
-.fade-enter-active, .fade-leave-active {
-  transition: 0.125s opacity ease-out;
-}
-.glide_up-enter-active,
-.glide_up-leave-active {
-	transition: all 0.25s linear;
-}
-.glide_up-enter-from,
-.glide_up-leave-to {
-	opacity: 0;
-	transform: translateY(500px);
-}
 </style>

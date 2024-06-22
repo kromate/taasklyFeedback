@@ -1,8 +1,8 @@
 <template>
 	<main class="w-full md:h-[calc(100vh-170px)] h-[calc(100vh-160px)]  px-5 ">
-		<div class="container \ flex flex-col md:flex-row gap-20 py-12 ">
+		<div class="container justify-between flex flex-col md:flex-row gap-20 py-12 ">
 			<DashboardCreateFeedback />
-			<div class="flex flex-col gap-4 w-full max">
+			<div class="flex flex-col gap-4 w-full max-w-2xl">
 				<DashboardUpvoteCard v-for="sample in feedbacks" :key="sample.id" :data="sample" :show-footer="true" />
 			</div>
 		</div>

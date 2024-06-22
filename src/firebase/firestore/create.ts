@@ -18,3 +18,15 @@ export const setFirestoreSubDocument = async (
 ) => {
 	await setDoc(doc(db, collectionName, documentName, subCollectionName, id), data)
 }
+
+export const setFirestoreSubSubDocument = async (
+	collectionName: string,
+	documentName: string,
+	subCollectionName: string,
+	subDocumentName: string,
+	subSubCollectionName: string,
+	id: string = uuidv4(),
+	data: any
+) => {
+	await setDoc(doc(db, collectionName, documentName, subCollectionName, subDocumentName, subSubCollectionName, id), data)
+}
