@@ -2,15 +2,15 @@
 	<div class="w-full">
 		<section v-if="!loading" class="flex flex-col w-full">
 			<h1 class="text-lg font-semibold mb-4">
-				{{ boards.length }} {{ boards.length === 1 ? 'Comment' : 'Comments' }}
+				{{ comments.length }} {{ comments.length === 1 ? 'Comment' : 'Comments' }}
 			</h1>
 			<div class="grid md:grid-cols-2 gap-4 w-full">
-				<nuxt-link v-for="board in boards" :key="board.id" :to="`/dashboard/${board.id}`" class="flex flex-col p-4 border border-dark w-full rounded shadow-md hover:btn_shadow">
+				<nuxt-link v-for="comment in comments" :key="comment.id" :to="`/dashboard/${comment.id}`" class="flex flex-col p-4 border border-dark w-full rounded shadow-md hover:btn_shadow">
 					<h1 class="text-lg font-medium">
-						{{ board.title }}
+						{{ comment.title }}
 					</h1>
 					<p class="text-sm">
-						{{ board.desc }}
+						{{ comment.desc }}
 					</p>
 				</nuxt-link>
 			</div>
@@ -24,9 +24,13 @@
 </template>
 
 <script setup lang="ts">
+import { useFetchFeadbackComments } from '@/composables/board/feedbacks/comments/fetch'
 
-const boards = ref([])
-const loading = ref(false)
+
+const { comments, fetchFeadbackComments, loading } = useFetchFeadbackComments()
+
+
+
 </script>
 
 <style scoped>
