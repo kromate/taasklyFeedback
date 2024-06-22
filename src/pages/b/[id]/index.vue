@@ -17,7 +17,7 @@ const { feedbacks, fetchBoardFeedbacks, loading } = useFetchBoardFeedbacks()
 
 const id = useRoute().params.id as string
 
-fetchBoardFeedbacks(id)
+await fetchBoardFeedbacks(id)
 
 const demo_feedback = [
 	{ id: 'a1b2c3d4e', title: 'Google Calendar integration', desc: 'I would be willing to pay extra for a calendar integration', upvotes: 123 },
