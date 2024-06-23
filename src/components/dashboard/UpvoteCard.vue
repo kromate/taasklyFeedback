@@ -20,7 +20,7 @@
 		<footer v-if="showFooter" class="mt-auto">
 			<div class="flex items-center gap-1 mt-2">
 				<MessageSquare :size="20" />
-				<span>{{ data.comment_count || 0 }}</span>
+				<span>{{ data.comment_ids?.length || 0 }}</span>
 			</div>
 		</footer>
 	</article>
@@ -36,6 +36,7 @@ type feedbackType = {
     desc: string
     upvotes: number
     comment_count?: number
+    comment_ids?: Array<string>
     id: string
 }
 defineProps<{
