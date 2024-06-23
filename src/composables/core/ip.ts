@@ -6,7 +6,6 @@ export const useIP = () => {
 
     if (process.server) {
         const { ssrContext } = useNuxtApp()
-        console.log(ssrContext?.event.context.ip)
         ip.value = ssrContext?.event.context.ip || null
     }
 

@@ -4,9 +4,13 @@ let initializedClicks = false
 
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  if (process.client && !!window.gtag) {
-    try {
-      await initializeAnalytics()
+    console.log('1')
+
+    if (process.client) {
+          await initializeAnalytics()
+      try {
+        console.log(to)
+
         trackPageView(to)
         if (!initializedClicks) {
             trackClicks()
