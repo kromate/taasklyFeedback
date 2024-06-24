@@ -32,7 +32,6 @@ const showBackBtn = computed(() => useRouter().currentRoute.value.name !== 'b-id
 const { board, fetchUserBoardById, loading } = useFetchUserBoardById()
 const id = useRoute().params.id as string
 await fetchUserBoardById(id)
-console.log()
 if (board.value.title === undefined) {
 	throw	createError({ statusCode: 404, statusMessage: 'Board not found' })
 }
