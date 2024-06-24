@@ -41,6 +41,7 @@
 					</p>
 				</div>
 			</div>
+			<Skeleton v-else height="500px" radius="8px" />
 		</div>
 	</main>
 	<Skeleton v-else height="500px" />
