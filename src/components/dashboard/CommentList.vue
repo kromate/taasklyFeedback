@@ -13,7 +13,11 @@
 						<Avatar :src="comment.user_phone" :name="comment.user_name" :size="24" class="w-8 h-8 mr-2" />
 						<span class="text">{{ comment.user_name }}</span>
 						<Dot />
-						<span class="text">{{ formatDate(comment.created_at, 'dateInput') }}</span>
+						<span class="text-sm">{{ formatDate(comment.created_at, 'dateInput') }}</span>
+						<Dot v-if="currentUserId === comment.user_id" />
+						<button v-if="currentUserId === comment.user_id" class="text-sm underline" @click="setDeleteCommentId(board_id, feedback_id, comment.id)">
+							Delete
+						</button>
 					</footer>
 				</article>
 			</div>
@@ -30,6 +34,12 @@
 import { Dot } from 'lucide-vue-next'
 import { formatDate } from '@/composables/utils/formatter'
 import { useFetchFeadbackComments } from '@/composables/board/feedbacks/comments/fetch'
+import { useDeleteComment } from '@/composables/board/feedbacks/comments/delete'
+import { useUser } from '@/composables/auth/user'
+
+const { currentUserId } = useUser()
+
+const { setDeleteCommentId } = useDeleteComment()
 
 
 

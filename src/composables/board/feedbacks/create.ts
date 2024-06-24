@@ -31,7 +31,7 @@ export const useCreateFeedback = () => {
             ...convertObjWithRefToObj(createFeedbackForm),
             id,
             board_id,
-            user_name: user.value?.displayName,
+            user_name: user.value?.displayName || 'Anonymous',
             user_phone: user.value?.phoneNumber || null,
             user_email: user.value?.email || null,
             user_photo: user.value?.photoURL || null,

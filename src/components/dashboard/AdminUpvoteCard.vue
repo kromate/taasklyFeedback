@@ -29,7 +29,7 @@
 			</div>
 			<div class="flex items-center gap-1 mt-2">
 				<MessageSquare :size="16" />
-				<span>{{ data.comment_count || 0 }}</span>
+				<span>{{ data.comment_ids?.length || 0 }}</span>
 			</div>
 		</footer>
 	</article>
@@ -58,6 +58,8 @@ type feedbackType = {
 	upvotes: number
 	comment_count?: number
 	status?: string
+	comment_ids?: Array<string>
+	upvote_ids?: Array<string>
     id: string
 }
 const props = defineProps<{

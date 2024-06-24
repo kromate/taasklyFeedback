@@ -15,3 +15,14 @@ export const deleteFirestoreSubCollectionDocument = async (
 ) => {
 	await deleteDoc(doc(db, collectionName, documentName, subCollectionName, id))
 }
+
+export const deleteFirestoreSubSubCollectionDocument = async(
+	collectionName: string,
+	documentName: string,
+	subCollectionName: string,
+	subDocumentName: string,
+	subSubCollectionName: string,
+	id: string
+) => {
+	await deleteDoc(doc(db, collectionName, documentName, subCollectionName, subDocumentName, subSubCollectionName, id))
+}

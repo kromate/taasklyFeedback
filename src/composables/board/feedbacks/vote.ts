@@ -26,6 +26,7 @@ export const useUpdateBoardFeedback = () => {
         loading.value = false
     }
     const downVote = async (board_id: string, feedback_id: string) => {
+ 2
         loading.value = true
         await updateFirestoreSubDocument('boards', board_id, 'feedbacks', feedback_id, { upvotes: increment(-1), updated_at: new Date().toISOString(), upvote_ids: arrayRemove(currentUserId.value) })
         loading.value = false

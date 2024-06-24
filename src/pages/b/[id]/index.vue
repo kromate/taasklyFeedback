@@ -36,8 +36,7 @@ useCustomHead({
 
 
 definePageMeta({
-	layout: 'public',
-	middleware: 'is-authenticated'
+	layout: 'public'
 })
 </script>
 

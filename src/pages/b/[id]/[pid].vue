@@ -58,8 +58,7 @@ const hasUpvoted = computed(() => feedback.value.upvote_ids?.includes(currentUse
 
 
 definePageMeta({
-	layout: 'public',
-	middleware: 'is-authenticated'
+	layout: 'public'
 })
 </script>
 
