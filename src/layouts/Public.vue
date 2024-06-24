@@ -25,13 +25,21 @@
 <script setup lang="ts">
 import { Undo2 } from 'lucide-vue-next'
 import { useFetchUserBoardById } from '@/composables/board/id'
-
+import { useCustomHead } from '@/composables/core/head'
 
 const showBackBtn = computed(() => useRouter().currentRoute.value.name !== 'b-id')
 
 const { board, fetchUserBoardById, loading } = useFetchUserBoardById()
 const id = useRoute().params.id as string
-fetchUserBoardById(id)
+await fetchUserBoardById(id)
+
+useCustomHead({
+	title: `${board.value.title} | Feedback`,
+	desc: board.value.desc,
+	img: '/og.png'
+})
+
+
 
 </script>
 
