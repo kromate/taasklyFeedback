@@ -29,6 +29,14 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+select {
+  overflow: hidden;
+  overflow: -moz-hidden-unscrollable;
+  background: url('/down.svg') white;
+  background-repeat: no-repeat;
+  background-position: 97% 50%;
+  z-index: 1;
+}
 
 
 

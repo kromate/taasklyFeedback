@@ -6,7 +6,12 @@ import { updateFirestoreSubDocument } from '@/firebase/firestore/edit'
 import { useUser } from '@/composables/auth/user'
 
 
-
+const statusKeys = ref([
+	{ name: 'New', value: 'NEW' },
+	{ name: 'in Progress', value: 'IN_PROGRESS' },
+	{ name: 'Completed', value: 'COMPLETED' },
+	{ name: 'Closed', value: 'CLOSED' }
+])
 
 export const useUpdateBoardFeedback = () => {
 	const feedback = ref({} as any)
@@ -20,6 +25,6 @@ export const useUpdateBoardFeedback = () => {
         await updateFirestoreSubDocument('boards', board_id, 'feedbacks', feedback_id, { upvotes: increment(-1), updated_at: new Date().toISOString(), upvote_ids: arrayRemove(currentUserId.value) })
     }
 
-	return { loading, feedback, upVote, downVote }
+	return { loading, feedback, upVote, downVote, statusKeys }
 }
 

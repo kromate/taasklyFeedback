@@ -4,6 +4,7 @@
 			<div class="flex flex-col gap-2">
 				<h1 class="font-semibold md:text-xl text-lg">
 					{{ data.title }}
+					<ColorBadge v-if="data?.status" :name="data?.status" />
 				</h1>
 				<p class="text-sm md:text-base">
 					{{ data.desc }}
@@ -37,6 +38,7 @@ import { useUpdateBoardFeedback } from '@/composables/board/feedbacks/vote'
 import { useUser } from '@/composables/auth/user'
 
 
+
 const board_id = useRoute().params.id as string
 // const feedback_id = useRoute().params.pid as string
 
@@ -49,6 +51,7 @@ const hasUpvoted = computed(() => props.data.upvote_ids?.includes(currentUserId.
 type feedbackType = {
     title: string
     desc: string
+    status?: string
     upvotes: number
     comment_count?: number
     comment_ids?: Array<string>

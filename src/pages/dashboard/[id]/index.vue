@@ -23,7 +23,7 @@
 					</div>
 				</h1>
 			</div>
-			<div v-if="!feedbackLoading" class="max-w-2xl flex flex-col gap-4">
+			<div v-if="!feedbackLoading" class="max-w-2xl flex flex-col gap-4 w-full">
 				<span class="text-3xl font-bold">{{ feedbacks.length }}  Posts</span>
 				<div v-if="feedbacks.length" class="flex flex-col gap-4 w-full">
 					<DashboardAdminUpvoteCard v-for="sample in feedbacks" :key="sample.id" :data="sample" />
