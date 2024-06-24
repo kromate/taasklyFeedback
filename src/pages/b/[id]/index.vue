@@ -13,15 +13,24 @@
 <script setup lang="ts">
 
 import { useFetchBoardFeedbacks } from '@/composables/board/feedbacks/fetch'
-
+import { useCustomHead } from '@/composables/core/head'
+import { useFetchUserBoardById } from '@/composables/board/id'
 
 
 
 const { feedbacks, fetchBoardFeedbacks, loading } = useFetchBoardFeedbacks()
+const { board, fetchUserBoardById } = useFetchUserBoardById()
 
 const id = useRoute().params.id as string
 
  fetchBoardFeedbacks(id)
+ await fetchUserBoardById(id)
+
+useCustomHead({
+	title: `${board.value.title} | Feedback`,
+	desc: board.value.desc,
+	img: '/og.png'
+})
 
 
 
