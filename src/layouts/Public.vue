@@ -7,7 +7,7 @@
 					<h1 class="text-3xl font-bold">
 						{{ board.title }}
 					</h1>
-					<p class="text-base ">
+					<p class="text-base max-w-sm">
 						{{ board.desc }}
 					</p>
 				</div>

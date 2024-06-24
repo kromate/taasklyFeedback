@@ -3,7 +3,7 @@
 		<section class="flex flex-col">
 			<DashboardNav />
 			<slot />
-			<a href="/" target="_blank" class="px-4 py-1 text-sm rounded-full bg-dark text-light fixed bottom-7 right-7 hover:underline">
+			<a href="https://feedback.taaskly.site/b/3154eb85-180b-4857-a74c-9b3307229325" target="_blank" class="px-4 py-1 text-sm rounded-full bg-dark text-light fixed bottom-7 right-7 hover:underline">
 				Drop us a feedback
 			</a>
 		</section>
