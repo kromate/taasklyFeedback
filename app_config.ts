@@ -29,7 +29,7 @@ export default {
                 name: 'twitter:title',
                 content: 'Feedback - Simplified Feedback, Amplified Business'
             },
-            { name: 'twitter:image', content: 'https://feedback.taaskly.site/og.png' },
+            { name: 'twitter:image', content: 'https://feedback.taaskly.site/og2.png' },
             {
                 name: 'twitter:description',
                 content: 'Seamlessly collect, analyze, and act on customer feedback to enhance your products and services. Boost satisfaction, loyalty, and performance with our intuitive feedback solution.'
@@ -44,8 +44,8 @@ export default {
             { name: 'google-site-verification', content: 'tWttF6w3RHPlNPm5u7KSRgh4lgkRUZ2Bwl6QzECjY18' },
             { property: 'og:type', content: 'website' },
             { property: 'og:url', content: 'https://feedback.taaskly.site/' },
-            { property: 'og:image', content: 'https://feedback.taaskly.site/og.png' },
-            { property: 'og:image:secure_url', content: 'https://feedback.taaskly.site/og.png' },
+            { property: 'og:image', content: 'https://feedback.taaskly.site/og2.png' },
+            { property: 'og:image:secure_url', content: 'https://feedback.taaskly.site/og2.png' },
             { property: 'og:image:type', content: 'image/png' },
             { property: 'og:site_name', content: 'Feedback' },
             {
@@ -57,7 +57,7 @@ export default {
         ],
 
         link: [
-            { rel: 'icon', type: 'image/x-icon', href: '/logo.png' },
+            { rel: 'icon', type: 'image/x-icon', href: '/logo.svg' },
             { href: 'https://fonts.googleapis.com', rel: 'preconnect' },
             { href: 'https://fonts.gstatic.com', rel: 'preconnect', crossorigin: true }
 

@@ -1,4 +1,5 @@
 import { User } from '@firebase/auth'
+import { useIP } from '../core/ip'
 import { ProfileType } from './types/profile'
 import { getSingleFirestoreDocument } from '@/firebase/firestore/fetch'
 
@@ -20,6 +21,8 @@ export const useUser = () => {
     }
     return null
     }) as Ref<User | null>
+
+
 
     const setUser = async (user: User) => {
         if (!user?.uid) {
@@ -46,6 +49,10 @@ export const useUser = () => {
     const id = computed(() => { return user.value ? user.value.uid : null })
     const is_admin = computed(() => { return userProfile.value ? userProfile.value.is_admin : false })
 
+    const currentUserId = computed(() => {
+        return id.value || useIP().ip.value
+    })
+
     const clearUser = () => {
         _userCookie.value = null
         _userProfileCookie.value = null
@@ -60,5 +67,5 @@ export const useUser = () => {
             await getSingleFirestoreDocument('users', uid, _userProfileCookie)
         }
     }
-    return { setUser, clearUser, user, userProfile, redirectUrl, isLoggedIn, username, id, is_admin, fetchUserProfile }
+    return { setUser, clearUser, user, userProfile, redirectUrl, isLoggedIn, username, id, is_admin, fetchUserProfile, currentUserId }
 }
