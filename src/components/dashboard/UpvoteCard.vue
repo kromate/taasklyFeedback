@@ -2,7 +2,7 @@
 	<article class="flex flex-col gap-2  border-[1.5px] border-dark bg-light p-4 rounded-md w-full transite cursor-pointer hover:btn_shadow" @click="useRouter().push(`/b/${board_id}/${data.id}`)">
 		<div class="flex items-center justify-between gap-2">
 			<div class="flex flex-col gap-2">
-				<h1 class="font-semibold md:text-xl text-lg">
+				<h1 class="font-semibold md:text-xl text-lg flex items-center gap-4">
 					{{ data.title }}
 					<ColorBadge v-if="data?.status" :name="data?.status" />
 				</h1>

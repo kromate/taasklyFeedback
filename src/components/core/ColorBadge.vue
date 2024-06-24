@@ -46,6 +46,7 @@ const palette = {
 const selectPalette = computed(() => {
 	switch (props.name.toLowerCase()) {
 		case 'pending':
+		case 'in_progress':
 			return palette.pending
 
 		case 'success':

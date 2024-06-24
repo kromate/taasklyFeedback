@@ -10,14 +10,14 @@
 				</p>
 			</div>
 			<div class="flex flex-col gap-2  items-center justify-center rounded-[4.5px] py-1 min-w-[50px] w-full md:w-auto">
-				<select id="" name="" class="input-field">
+				<select id="status" v-model="data.status" name="status" class="input-field" @change="onStatusChange($event, board_id, data.id)">
 					<option v-for="status in statusKeys" :value="status.value">
 						{{ status.name }}
 					</option>
 				</select>
 				<a :href="`http://${host}/b/${board_id}/${data.id}`" target="_blank" class="btn-primary w-full gap-2">View <MoveUpRight :size="18" /></a>
-				<button class="btn btn-primary w-full gap-2">
-					Delete  <Trash :size="20" />
+				<button class="btn btn-primary w-full gap-2" @click="setDeleteFeedbackId(board_id, data.id)">
+					Delete
 				</button>
 			</div>
 		</div>
@@ -36,10 +36,14 @@
 </template>
 
 <script setup lang="ts">
-import { ChevronUp, MessageSquare, MoveUpRight, Trash } from 'lucide-vue-next'
+import { ChevronUp, MessageSquare, MoveUpRight } from 'lucide-vue-next'
 import { useUpdateBoardFeedback } from '@/composables/board/feedbacks/vote'
+import { useDeleteFeedback } from '@/composables/board/feedbacks/delete'
 
-const { statusKeys } = useUpdateBoardFeedback()
+const { statusKeys, onStatusChange } = useUpdateBoardFeedback()
+
+
+const { setDeleteFeedbackId } = useDeleteFeedback()
 
 
 
@@ -53,9 +57,10 @@ type feedbackType = {
     desc: string
 	upvotes: number
 	comment_count?: number
+	status?: string
     id: string
 }
-defineProps<{
+const props = defineProps<{
 	data: feedbackType
 	showFooter?: boolean
 }>()

@@ -139,7 +139,7 @@ const closeBtnPressed = () => {
 }
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">
 .generator_tw{
 	@apply sm:w-[700px] sm:w-[400px]
 }

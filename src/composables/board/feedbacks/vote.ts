@@ -13,18 +13,37 @@ const statusKeys = ref([
 	{ name: 'Closed', value: 'CLOSED' }
 ])
 
+
+
 export const useUpdateBoardFeedback = () => {
 	const feedback = ref({} as any)
     const loading = ref(false)
     const { currentUserId } = useUser()
 
     const upVote = async (board_id: string, feedback_id: string) => {
+        loading.value = true
         await updateFirestoreSubDocument('boards', board_id, 'feedbacks', feedback_id, { upvotes: increment(1), updated_at: new Date().toISOString(), upvote_ids: arrayUnion(currentUserId.value) })
+        loading.value = false
     }
     const downVote = async (board_id: string, feedback_id: string) => {
+        loading.value = true
         await updateFirestoreSubDocument('boards', board_id, 'feedbacks', feedback_id, { upvotes: increment(-1), updated_at: new Date().toISOString(), upvote_ids: arrayRemove(currentUserId.value) })
+        loading.value = false
     }
 
-	return { loading, feedback, upVote, downVote, statusKeys }
+    const updateStatus = async (board_id: string, feedback_id: string, status: string) => {
+        loading.value = true
+        await updateFirestoreSubDocument('boards', board_id, 'feedbacks', feedback_id, { status, updated_at: new Date().toISOString() })
+        useAlert().openAlert({ type: 'SUCCESS', msg: 'Status Updated' })
+        loading.value = false
+    }
+
+    const onStatusChange = (e: Event, board_id, feedback_id) => {
+	const target = e.target as HTMLSelectElement
+	const status = target.value
+	updateStatus(board_id, feedback_id, status)
+}
+
+	return { loading, feedback, upVote, downVote, statusKeys, updateStatus, onStatusChange }
 }
 

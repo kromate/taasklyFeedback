@@ -7,10 +7,10 @@
 					<div class="flex flex-col">
 						<span class="text-3xl font-bold">{{ board.title }}</span>
 						<span class="text-base ">{{ board.desc }}</span>
-						<div class="field mt-4">
+						<div class="field mt-4 items-start gap-4">
 							<label for="link" class="text-lg">Public link</label>
 							<div class="input-field w-full py-4 flex items-center justify-between gap-5">
-								<div class="select-all  text-base" @click="copyBoardLink(board.id)">
+								<div class="select-all  text-base w-full" @click="copyBoardLink(board.id)">
 									{{ truncateString(`${host}/b/${board.id}`, 20) }}
 								</div>
 
@@ -19,6 +19,9 @@
 									<a :href="`http://${host}/b/${board.id}`" target="_blank"><MoveUpRight class="cursor-pointer border border-dark p-1 rounded" :size="28" /></a>
 								</div>
 							</div>
+							<button class="btn btn-primary w-full gap-2" @click="setDeleteBoardId(board.id)">
+								Delete
+							</button>
 						</div>
 					</div>
 				</h1>
@@ -49,6 +52,10 @@ import { truncateString } from '@/composables/utils/formatter'
 import { useFetchUserBoardById } from '@/composables/board/id'
 import { useCopyToClipboard } from '@/composables/utils/share'
 import { useFetchBoardFeedbacks } from '@/composables/board/feedbacks/fetch'
+import { useDeleteBoard } from '@/composables/board/delete'
+
+
+const { setDeleteBoardId } = useDeleteBoard()
 
 const { feedbacks, fetchBoardFeedbacks, loading: feedbackLoading } = useFetchBoardFeedbacks()
 const { board, fetchUserBoardById, loading } = useFetchUserBoardById()

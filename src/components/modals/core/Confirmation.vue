@@ -7,11 +7,11 @@
 
 	>
 		<p class="text-dark text-lg tracking-[0.1rem] text-center">
-			{{ desc }}
+			{{ description }}
 		</p>
 
 		<div class="grid grid-cols-2 gap-4 mt-6">
-			<button class="modal-btn" @click="closeAlert">
+			<button class="modal-btn !bg-dark" @click="closeAlert">
 				No
 			</button>
 			<button class="modal-btn border-red bg-red text-light hover:bg-red" :disabled="loading" @click="call_function()">
@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { useConfirmationModal } from '@/composables/core/confirmation'
 
-const { call_function, closeAlert, desc, title, loading } = useConfirmationModal()
+const { call_function, closeAlert, description, title, loading } = useConfirmationModal()
 
 </script>
 

@@ -103,7 +103,32 @@
         backdrop-filter: blur(1.5px);
     }
 
+    .modal {
+        @apply bg-light flex flex-col items-start gap-4 px-8 p-6 max-h-screen sm:rounded-md sm:w-[470px] max-w-[100%] overflow-y-auto shadow-md border border-dark transite;
+    }
+        .modal-title {
+        @apply font-medium text-2xl text-start w-full text-dark pb-4;
+    }
 
+    .modal-btn {
+        @apply center px-4 py-2.5 border border-dark text-light hover:text-light bg-baby_purple transite w-full justify-center disabled:bg-gray-500 cursor-pointer disabled:cursor-not-allowed rounded-lg;
+    }
+
+    .modal-btn-secondary {
+        @apply rounded-md center px-4 py-3 border-2 border-secondary text-secondary hover:text-light hover:bg-secondary transite w-full justify-center disabled:bg-gray-500 cursor-pointer disabled:cursor-not-allowed;
+    }
+
+    .modal-btn-sm {
+        @apply modal-btn h-10 center px-7;
+    }
+
+    .modal-btn-xs {
+        @apply modal-btn center px-4 h-8 text-xs;
+    }
+
+    .modal-btn-red {
+        @apply rounded-md center px-4 py-3 border-2 border-red text-red hover:text-light hover:bg-red transite w-full flex justify-center disabled:bg-gray-500 cursor-pointer disabled:cursor-not-allowed;
+    }
 
 }
 
