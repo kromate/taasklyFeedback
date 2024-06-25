@@ -30,11 +30,13 @@ const trackPageView = (to) => {
 }
 
 const trackClicks = () => {
-      document.addEventListener('click', (event: MouseEvent) => {
-        const target = event.target as HTMLElement
+     const { event } = useGtag()
+  document.addEventListener('click', (mouse_event: MouseEvent) => {
+        const target = mouse_event.target as HTMLElement
         const label = target.getAttribute('data-ga-label') || target.innerText || target.tagName
 
-        window.gtag('event', 'click', {
+
+         event('click', {
           event_category: 'engagement',
           event_label: label
         })
