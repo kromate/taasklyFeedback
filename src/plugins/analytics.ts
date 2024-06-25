@@ -8,5 +8,4 @@ export default defineNuxtPlugin((nuxtApp) => {
       id: GA_ID
     }
   })
-  trackRouter(useRouter())
 })
