@@ -16,7 +16,7 @@ export default {
     '@/components',
     { path: '@/components/core', extensions: ['vue'] }
   ],
-
+  plugins: ['@/plugins/analytics.ts'],
     css: ['@/assets/css/main.css'],
   alias: {
     '@': './src'
@@ -32,7 +32,6 @@ export default {
   vite: {
 
     plugins: [
-      '@/plugins/analytics.ts',
       eslintPlugin({ useEslintrc: true, exclude: ['**/node_modules/**'] })
     ],
     resolve: {
