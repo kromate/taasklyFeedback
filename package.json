@@ -24,12 +24,12 @@
     "gsap": "^3.12.2",
     "lucide-vue-next": "^0.379.0",
     "nuxt": "3.6.5",
+    "nuxt-gtag": "1.1.2",
     "nuxt-security": "^2.0.0-rc.6",
     "radix-vue": "^1.8.2",
     "sass": "^1.69.5",
     "uuid": "^9.0.0",
     "vue": "^3.4.27",
-    "vue-gtag-next": "^1.14.0",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {

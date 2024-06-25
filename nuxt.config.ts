@@ -2,11 +2,15 @@ import { fileURLToPath, URL } from 'node:url'
 import eslintPlugin from 'vite-plugin-eslint'
 import app from './app_config'
 
+ const GA_ID = import.meta.env.VITE_GA_ID as string
+
 export default {
   ssr: true,
   devtools: { enabled: false },
-  modules: ['@vueuse/nuxt', '@nuxtjs/tailwindcss'],
-
+  modules: ['@vueuse/nuxt', '@nuxtjs/tailwindcss', 'nuxt-gtag'],
+  gtag: {
+    id: GA_ID
+  },
   dir: {
     layouts: './src/layouts',
     pages: './src/pages',
@@ -16,7 +20,7 @@ export default {
     '@/components',
     { path: '@/components/core', extensions: ['vue'] }
   ],
-  plugins: ['@/plugins/analytics.ts'],
+
     css: ['@/assets/css/main.css'],
   alias: {
     '@': './src'
