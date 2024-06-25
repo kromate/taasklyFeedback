@@ -32,6 +32,7 @@ export default {
   vite: {
 
     plugins: [
+      '@/plugins/analytics.ts',
       eslintPlugin({ useEslintrc: true, exclude: ['**/node_modules/**'] })
     ],
     resolve: {

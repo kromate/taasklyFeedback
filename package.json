@@ -29,6 +29,7 @@
     "sass": "^1.69.5",
     "uuid": "^9.0.0",
     "vue": "^3.4.27",
+    "vue-gtag-next": "^1.14.0",
     "vue-router": "^4.3.2"
   },
   "devDependencies": {
