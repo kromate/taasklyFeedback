@@ -1,11 +1,15 @@
+import { useGtag } from 'vue-gtag-next'
 import { initializeAnalytics, GA_ID } from '@/composables/core/analytics'
 
 let initializedClicks = false
 
+useGtag
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
     if (process.client) {
-          await initializeAnalytics()
+      await initializeAnalytics()
+      const { pageview } = useGtag()
+      pageview({ page_path: to.fullPath, page_title: to.meta.title as string || 'Untitled Page' })
       try {
         trackPageView(to)
         if (!initializedClicks) {
