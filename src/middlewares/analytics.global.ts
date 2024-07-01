@@ -3,7 +3,6 @@
 
 let initializedClicks = false
 
-useGtag
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
     if (process.client) {

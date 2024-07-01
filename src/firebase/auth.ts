@@ -2,7 +2,9 @@ import {
 	GoogleAuthProvider,
 	signInWithPopup,
 	onAuthStateChanged,
-	signOut, setPersistence, browserLocalPersistence,
+	signOut,
+	setPersistence,
+	browserLocalPersistence,
 	User
 } from 'firebase/auth'
 import { auth } from './init'
@@ -11,9 +13,8 @@ import { useUser } from '@/composables/auth/user'
 
 const { openAlert } = useAlert()
 
-
 export const watchUserStateChange = () => {
-	if (process.client) {
+	if (typeof window !== 'undefined') {
 		onAuthStateChanged(auth, async (user) => {
 			const { clearUser, setUser } = useUser()
 			if (user) await setUser(user)
@@ -22,45 +23,27 @@ export const watchUserStateChange = () => {
 	}
 }
 
-// export const getCurrentUser = async () => {
-// 	const user = auth.currentUser
-// 	const { clearUser, setUser } = useUser()
-// 			if (user) await setUser(user)
-// 			else await clearUser()
-// }
-
-
 export const authRef = auth
 const provider = new GoogleAuthProvider()
 
 export const googleAuth = async () => {
 	try {
-			const result = await signInWithPopup(auth, provider)
-		const token = await result.user.getIdToken()
-		await serverAuth(token)
+		await setPersistence(auth, browserLocalPersistence)
+		const result = await signInWithPopup(auth, provider)
 		return result.user as User
 	} catch (err: any) {
-		useAlert().openAlert({ type: 'ERROR', msg: `Error: ${err}` })
+		openAlert({ type: 'ERROR', msg: `Error: ${err.message}` })
 	}
 }
 
 export const signOutUser = async () => {
-	const { clearUser, user } = useUser()
+	const { clearUser } = useUser()
 	try {
 		await signOut(auth)
 		await clearUser()
-	} catch (error:any) {
-		openAlert({ type: 'ERROR', msg: `Oops seems something went wrong 😕 : ${error.message}` })
+	} catch (error: any) {
+		openAlert({ type: 'ERROR', msg: `Oops, something went wrong 😕 : ${error.message}` })
 	}
 }
 
-const serverAuth = async (token: string) => {
-	try {
-		await $fetch('/api/login', {
-        method: 'POST',
-        body: JSON.stringify({ token })
-	})
-	} catch (err: any) {
-		throw new Error(err.response._data.message)
-    }
-  }
+
