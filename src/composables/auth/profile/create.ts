@@ -71,16 +71,16 @@ export const useCreateProfile = () => {
 				const redirectUrl = useUser().redirectUrl.value
 				useUser().redirectUrl.value = null
 				location.assign(redirectUrl ?? '/main/business')
-				useAlert().openAlert({ type: 'SUCCESS', msg: res.msg })
+				useAlert().openAlert({ type: 'SUCCESS', msg: res.msg, addrs: 'createProfile' })
 
 				loading.value = false
 			} else {
-				useAlert().openAlert({ type: 'ERROR', msg: res.msg })
+				useAlert().openAlert({ type: 'ERROR', msg: res.msg, addrs: 'createProfile' })
 				loading.value = false
 			}
 		} catch (e: any) {
 			loading.value = false
-			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}` })
+			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'createProfile' })
 		}
 	}
 

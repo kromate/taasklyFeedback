@@ -4,10 +4,12 @@ import { getFirestoreCollectionWithWhereQuery } from '@/firebase/firestore/query
 import { useAlert } from '@/composables/core/notification'
 
 const loading = ref(false)
-const custom_link = ref('')
+
 const is_editing = ref(false)
 
 export const useEditBoard = () => {
+    const isCustomLinkAvailable = ref(true)
+    const custom_link = ref('')
     const updateCustomLink = (id: string) => {
         if (custom_link.value === '') {
             is_editing.value = false
@@ -17,23 +19,14 @@ export const useEditBoard = () => {
         loading.value = true
         updateFirestoreDocument('boards', id, { custom_link: custom_link.value })
         is_editing.value = false
-        useAlert().openAlert({ type: 'SUCCESS', msg: 'Board Updated successfully' })
+        useAlert().openAlert({ type: 'SUCCESS', msg: 'Board Updated successfully', addrs: 'updateCustomLink' })
         loading.value = false
         } catch (e: any) {
             loading.value = false
-            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}` })
+            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'updateCustomLink' })
         }
     }
-
-    return { updateCustomLink, loading, custom_link, is_editing }
-}
-
-
-export const useCheckCustomLink = () => {
-	const isCustomLinkAvailable = ref(true)
-
-
-	const checkCustomLink = async () => {
+    const checkCustomLink = async () => {
 		loading.value = true
 		custom_link.value = custom_link.value.replace(/ /g, '').toLowerCase()
         const exists = ref([])
@@ -51,6 +44,7 @@ export const useCheckCustomLink = () => {
 
 	watchDebounced(custom_link, checkCustomLink, { debounce: 500 })
 
-	return { isCustomLinkAvailable, checkCustomLink, loading }
+    return { updateCustomLink, loading, custom_link, is_editing, isCustomLinkAvailable }
 }
+
 

@@ -53,11 +53,11 @@ export const useCreateComment = () => {
             ])
     await updateFirestoreSubDocument('boards', board_id, 'feedbacks', feedback_id, { comment_count: increment(1), updated_at: new Date().toISOString(), comment_ids: arrayUnion(id) })
             loading.value = false
-            useAlert().openAlert({ type: 'SUCCESS', msg: 'Comment Created successfully' })
+            useAlert().openAlert({ type: 'SUCCESS', msg: 'Comment Created successfully', addrs: 'createComment' })
             resetForm()
         } catch (e: any) {
             loading.value = false
-            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}` })
+            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'createComment' })
         }
     }
 

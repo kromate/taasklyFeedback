@@ -15,7 +15,7 @@
 						<Dot />
 						<span class="text-sm">{{ formatDate(comment.created_at, 'dateInput') }}</span>
 						<Dot v-if="currentUserId === comment.user_id" />
-						<button v-if="currentUserId === comment.user_id" class="text-sm underline" @click="setDeleteCommentId(board_id, feedback_id, comment.id)">
+						<button v-if="currentUserId === comment.user_id" class="text-sm underline" @click="setDeleteCommentId(board.id, feedback_id, comment.id)">
 							Delete
 						</button>
 					</footer>
@@ -36,11 +36,12 @@ import { formatDate } from '@/composables/utils/formatter'
 import { useFetchFeadbackComments } from '@/composables/board/feedbacks/comments/fetch'
 import { useDeleteComment } from '@/composables/board/feedbacks/comments/delete'
 import { useUser } from '@/composables/auth/user'
+import { useFetchUserBoardById } from '@/composables/board/id'
 
 const { currentUserId } = useUser()
 
 const { setDeleteCommentId } = useDeleteComment()
-
+const { board, fetchUserBoardById } = useFetchUserBoardById()
 
 
 
@@ -49,7 +50,9 @@ const { comments, fetchFeadbackComments, loading } = useFetchFeadbackComments()
 const board_id = useRoute().params.id as string
 const feedback_id = useRoute().params.pid as string
 
-fetchFeadbackComments(board_id, feedback_id)
+await fetchUserBoardById(board_id)
+fetchFeadbackComments(board.value.id, feedback_id)
+
 </script>
 
 <style scoped>

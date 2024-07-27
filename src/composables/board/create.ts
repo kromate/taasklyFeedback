@@ -50,12 +50,12 @@ export const useCreateBoard = () => {
             const res = await setFirestoreDocument('boards', id, sentData)
 
             loading.value = false
-            useAlert().openAlert({ type: 'SUCCESS', msg: 'Board Created successfully' })
+            useAlert().openAlert({ type: 'SUCCESS', msg: 'Board Created successfully', addrs: 'createBoard' })
             useRouter().push(`/dashboard/${id}`)
             resetForm()
         } catch (e: any) {
             loading.value = false
-            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}` })
+            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'createBoard' })
         }
     }
 

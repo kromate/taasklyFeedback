@@ -1,5 +1,5 @@
 <template>
-	<article class="flex flex-col gap-2  border-[1.5px] border-dark bg-light p-4 rounded-md w-full transite cursor-pointer hover:btn_shadow" @click="useRouter().push(`/b/${board_id}/${data.id}`)">
+	<article class="flex flex-col gap-2  border-[1.5px] border-dark bg-light p-4 rounded-md w-full transite cursor-pointer hover:btn_shadow" @click="useRouter().push(`/${type}/${type === 'b' ? board.id : board.custom_link}/${data.id}`)">
 		<div class="flex items-center justify-between gap-2">
 			<div class="flex flex-col gap-2">
 				<h1 class="font-semibold md:text-xl text-lg flex items-center gap-4">
@@ -13,7 +13,7 @@
 			<div
 				class="flex flex-col items-center justify-center border border-dark rounded-[4.5px] py-1 min-w-[50px]  hover:btn_shadow"
 				:class="[hasUpvoted ? 'bg-grey_two !text-light' : 'bg-light text-dark']"
-				@click.stop="hasUpvoted ? downVote(board_id, data.id) : upVote(board_id, data.id)"
+				@click.stop="hasUpvoted ? downVote(board.id, data.id) : upVote(board.id, data.id)"
 			>
 				<ChevronUp />
 				<p v-if="!loading">
@@ -38,9 +38,12 @@ import { useUpdateBoardFeedback } from '@/composables/board/feedbacks/vote'
 import { useUser } from '@/composables/auth/user'
 
 
+const board_props_id = useRoute().params.id
 
-const board_id = useRoute().params.id as string
-// const feedback_id = useRoute().params.pid as string
+
+
+const type = useRoute().params.type as string
+
 
 const { currentUserId } = useUser()
 
@@ -60,6 +63,7 @@ type feedbackType = {
 }
 const props = defineProps<{
 	data: feedbackType
+	board:Record<string, any>
 	showFooter?: boolean
 }>()
 

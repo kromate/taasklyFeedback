@@ -18,7 +18,7 @@ export const useFetchUserBoards = () => {
 			loading.value = false
 		} catch (e: any) {
 			loading.value = false
-			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}` })
+			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'fetchUserBoards' })
 		}
 	}
 	return { loading, boards, fetchUserBoards }

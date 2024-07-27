@@ -5,7 +5,7 @@
 				<div v-if="!feedbackLoading" class="flex items-start  gap-4 max-w-2xl">
 					<div class="flex flex-col items-center justify-center border border-dark rounded-[4.5px] py-1 min-w-[50px]  hover:btn_shadow"
 						:class="[hasUpvoted ? 'bg-grey_two !text-light' : 'bg-light text-dark']"
-						@click.stop="hasUpvoted ? downVote(board_id, feedback.id) : upVote(board_id, feedback.id)"
+						@click.stop="hasUpvoted ? downVote(board.id, feedback.id) : upVote(board.id, feedback.id)"
 					>
 						<ChevronUp />
 						<p>
@@ -38,16 +38,20 @@ import CommentList from '@/components/dashboard/CommentList.vue'
 import { useFetchBoardFeedbackById } from '@/composables/board/feedbacks/id'
 import { useUpdateBoardFeedback } from '@/composables/board/feedbacks/vote'
 import { useUser } from '@/composables/auth/user'
+import { useFetchUserBoardById } from '@/composables/board/id'
 
 
 
 
-const id = useRoute().params.pid as string
+const feedback_id = useRoute().params.pid as string
 const board_id = useRoute().params.id as string
 
 const { feedback, fetchBoardFeedbackById, loading: feedbackLoading } = useFetchBoardFeedbackById()
+const { board, fetchUserBoardById } = useFetchUserBoardById()
 
-fetchBoardFeedbackById(board_id, id)
+
+await fetchUserBoardById(board_id)
+fetchBoardFeedbackById(board.value, feedback_id)
 
 const { currentUserId } = useUser()
 

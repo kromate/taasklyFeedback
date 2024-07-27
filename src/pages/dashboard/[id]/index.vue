@@ -70,16 +70,16 @@
 <script setup lang="ts">
 import { Copy, Undo2, MoveUpRight, PenLine } from 'lucide-vue-next'
 import { truncateString } from '@/composables/utils/formatter'
-import { useFetchUserBoardById } from '@/composables/board/id'
+import { useFetchUserDoashboardBoardById } from '@/composables/board/id'
 import { useCopyToClipboard } from '@/composables/utils/share'
-import { useFetchBoardFeedbacks } from '@/composables/board/feedbacks/fetch'
+import { useFetchDashboardBoardFeedbacks } from '@/composables/board/feedbacks/fetch'
 import { useDeleteBoard } from '@/composables/board/delete'
-import { useCheckCustomLink, useEditBoard } from '@/composables/board/edit'
+import { useEditBoard } from '@/composables/board/edit'
 
 
-const { isCustomLinkAvailable } = useCheckCustomLink()
 
-const { updateCustomLink, loading: editLoading, custom_link, is_editing } = useEditBoard()
+
+const { updateCustomLink, loading: editLoading, custom_link, is_editing, isCustomLinkAvailable } = useEditBoard()
 const { setDeleteBoardId } = useDeleteBoard()
 
 
@@ -94,8 +94,8 @@ const disabled = computed(() => {
 	}
 })
 
-const { feedbacks, fetchBoardFeedbacks, loading: feedbackLoading } = useFetchBoardFeedbacks()
-const { board, fetchUserBoardById, loading } = useFetchUserBoardById()
+const { feedbacks, fetchBoardFeedbacks, loading: feedbackLoading } = useFetchDashboardBoardFeedbacks()
+const { board, fetchUserBoardById, loading } = useFetchUserDoashboardBoardById()
 
 const id = useRoute().params.id as string
 
@@ -105,7 +105,9 @@ fetchUserBoardById(id)
 onMounted(async () => {
 	fetchBoardFeedbacks(id)
 	await fetchUserBoardById(id)
-	custom_link.value = board.value.custom_link
+	if (board.value.custom_link) {
+		custom_link.value = board.value.custom_link
+	}
 })
 
 const host = computed(() => {

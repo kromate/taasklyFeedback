@@ -1,5 +1,5 @@
 <template>
-	<form class="flex flex-col w-full gap-4" @submit.prevent="create(board_id, id)">
+	<form class="flex flex-col w-full gap-4" @submit.prevent="create(board.id, id)">
 		<div class="field w-full">
 			<textarea
 				id="desc"
@@ -25,11 +25,15 @@
 
 
 import { useCreateComment } from '@/composables/board/feedbacks/comments/create'
+import { useFetchUserBoardById } from '@/composables/board/id'
 
+const { board, fetchUserBoardById } = useFetchUserBoardById()
 
 
 const id = useRoute().params.pid as string
 const board_id = useRoute().params.id as string
+
+await fetchUserBoardById(board_id)
 
 const { create, createCommentForm, loading } = useCreateComment()
 </script>

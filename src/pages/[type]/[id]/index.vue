@@ -1,9 +1,9 @@
 <template>
 	<main class="w-full md:h-[calc(100vh-170px)] h-[calc(100vh-160px)]  px-5 ">
 		<div class="container justify-between flex flex-col md:flex-row gap-20 py-12 ">
-			<DashboardCreateFeedback />
+			<DashboardCreateFeedback :board="board" />
 			<div v-if="!loading" class="flex flex-col gap-4 w-full max-w-2xl">
-				<DashboardUpvoteCard v-for="sample in feedbacks" :key="sample.id" :data="sample" :show-footer="true" />
+				<DashboardUpvoteCard v-for="sample in feedbacks" :key="sample.id" :board="board" :data="sample" :show-footer="true" />
 			</div>
 			<Skeleton v-else height="500px" radius="8px" />
 		</div>
@@ -23,8 +23,10 @@ const { board, fetchUserBoardById } = useFetchUserBoardById()
 
 const id = useRoute().params.id as string
 
- fetchBoardFeedbacks(id)
- await fetchUserBoardById(id)
+
+await fetchUserBoardById(id)
+fetchBoardFeedbacks(board.value)
+
 
 useCustomHead({
 	title: `${board.value.title} | Feedback`,

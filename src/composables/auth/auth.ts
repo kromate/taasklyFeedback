@@ -44,7 +44,7 @@ export const useSignin = () => {
       if (location.pathname === '/auth/profile') await router.push('/auth/login')
       useAuthModal().closeLogout()
       location.reload()
-      useAlert().openAlert({ type: 'SUCCESS', msg: 'Signed out successfully' })
+      useAlert().openAlert({ type: 'SUCCESS', msg: 'Signed out successfully', addrs: 'signOut' })
     } catch (err) {
       console.error('Sign Out Error:', err)
     } finally {

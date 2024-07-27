@@ -21,7 +21,7 @@ export const useFetchUserBoardById = () => {
 			loading.value = false
 		} catch (e: any) {
 			loading.value = false
-			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}` })
+			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'fetchUserBoardById' })
 		}
 		} else {
 			    try {
@@ -34,11 +34,29 @@ export const useFetchUserBoardById = () => {
 			loading.value = false
 		} catch (e: any) {
 			loading.value = false
-			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}` })
+			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'fetchUserBoardById' })
 		}
 		}
 	}
 	return { loading, board, fetchUserBoardById }
 }
 
+
+export const useFetchUserDoashboardBoardById = () => {
+	const board = ref({} as any)
+	const loading = ref(false)
+
+		const fetchUserBoardById = async (id:string) => {
+		if (board.value.length > 0) return
+        loading.value = true
+        try {
+			await getSingleFirestoreDocument('boards', id, board)
+			loading.value = false
+		} catch (e: any) {
+			loading.value = false
+			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'fetchUserBoardById' })
+		}
+	}
+	return { loading, board, fetchUserBoardById }
+}
 

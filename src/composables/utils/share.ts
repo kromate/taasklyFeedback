@@ -15,12 +15,13 @@ export const useCopyToClipboard = () => {
 		if (!isSupported.value)
 			return useAlert().openAlert({
 				type: 'ERROR',
-				msg: 'Seems like your device doesn\'t clipboarding'
+				msg: 'Seems like your device doesn\'t clipboarding',
+				addrs: 'useCopyToClipboard'
 			})
 		source.value = copyDataObj.info
 		copy()
 		if (copied)
-			return useAlert().openAlert({ type: 'SUCCESS', msg: copyDataObj.msg })
+			return useAlert().openAlert({ type: 'SUCCESS', msg: copyDataObj.msg, addrs: 'useCopyToClipboard' })
 	}
 
 	return { copyData }

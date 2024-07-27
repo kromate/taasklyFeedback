@@ -24,13 +24,13 @@ export const useCreateFeedback = () => {
     const loading = ref(false)
 
 
-    const create = async (board_id:string) => {
+    const create = async (board:Record<string, any>) => {
             const id = uuidv4()
         loading.value = true
         const sentData = {
             ...convertObjWithRefToObj(createFeedbackForm),
             id,
-            board_id,
+            board_id: board.id,
             user_name: user.value?.displayName || 'Anonymous',
             user_phone: user.value?.phoneNumber || null,
             user_email: user.value?.email || null,
@@ -47,16 +47,16 @@ export const useCreateFeedback = () => {
 
         try {
             loading.value = true
-            const res = await setFirestoreSubDocument('boards', board_id, 'feedbacks', id, sentData)
+            const res = await setFirestoreSubDocument('boards', board.id, 'feedbacks', id, sentData)
 
             loading.value = false
             const type = useRoute().params.type as string
-            useAlert().openAlert({ type: 'SUCCESS', msg: 'Feedback Created successfully' })
-            useRouter().push(`/${type}/${board_id}/${id}`)
+            useAlert().openAlert({ type: 'SUCCESS', msg: 'Feedback Created successfully', addrs: 'createFeedback' })
+            useRouter().push(`/${type}/${type === 'b' ? board.id : board.custom_link}/${id}`)
             resetForm()
         } catch (e: any) {
             loading.value = false
-            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}` })
+            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'createFeedback' })
         }
     }
 

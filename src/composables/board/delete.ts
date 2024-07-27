@@ -21,11 +21,11 @@ export const useDeleteBoard = () => {
 			await deleteFirestoreDocument('boards', deleteBoardId.value)
 			loading.value = false
 			useConfirmationModal().closeAlert()
-			useAlert().openAlert({ type: 'SUCCESS', msg: 'Board Deleted successfully' })
+			useAlert().openAlert({ type: 'SUCCESS', msg: 'Board Deleted successfully', addrs: 'deleteBoard' })
 			useRouter().push('/dashboard')
 		} catch (e: any) {
 			loading.value = false
-			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}` })
+			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'deleteBoard' })
 		}
 	}
 

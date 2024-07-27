@@ -52,7 +52,7 @@ export const useUpdateUserProfile = () => {
     const { id: user_id, isLoggedIn, userProfile, fetchUserProfile } = useUser()
     const loading = ref(false)
     const update = async () => {
-        if (!isLoggedIn.value) return useAuthModal().openLoginAlert()
+        if (!isLoggedIn.value) return
         const sentData = {
             bio: userProfileForm.bio.value,
             updated_at: serverTimestamp(),
@@ -67,7 +67,7 @@ export const useUpdateUserProfile = () => {
         } as any
 
         if (!user_id.value) {
-            useAlert().openAlert({ type: 'ERROR', msg: 'UserId is missing' })
+            useAlert().openAlert({ type: 'ERROR', msg: 'UserId is missing', addrs: 'update' })
             return
         }
         try {
@@ -75,19 +75,19 @@ export const useUpdateUserProfile = () => {
             await updateFirestoreDocument('users', user_id.value, sentData)
             userProfile.value = sentData
             loading.value = false
-            useAlert().openAlert({ type: 'SUCCESS', msg: 'Profile updated successfully' })
+            useAlert().openAlert({ type: 'SUCCESS', msg: 'Profile updated successfully', addrs: 'update' })
             fetchUserProfile(user_id.value)
             isDisabled.value = true
         } catch (e: any) {
             loading.value = false
-            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}` })
+            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'update' })
         }
     }
 
     const updatePhoto = async (url: string) => {
-        if (!isLoggedIn.value) return useAuthModal().openLoginAlert()
+        if (!isLoggedIn.value) return
         if (!user_id.value) {
-            useAlert().openAlert({ type: 'ERROR', msg: 'UserId is missing' })
+            useAlert().openAlert({ type: 'ERROR', msg: 'UserId is missing', addrs: 'updatePhoto' })
             return
         }
         try {
@@ -96,7 +96,7 @@ export const useUpdateUserProfile = () => {
                 photo_url: url
             })
             loading.value = false
-            useAlert().openAlert({ type: 'SUCCESS', msg: 'Profile photo updated successfully' })
+            useAlert().openAlert({ type: 'SUCCESS', msg: 'Profile photo updated successfully', addrs: 'updatePhoto' })
             fetchUserProfile(user_id.value)
         } catch (e: any) {
             loading.value = false

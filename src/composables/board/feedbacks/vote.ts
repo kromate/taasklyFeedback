@@ -34,7 +34,7 @@ export const useUpdateBoardFeedback = () => {
     const updateStatus = async (board_id: string, feedback_id: string, status: string) => {
         loading.value = true
         await updateFirestoreSubDocument('boards', board_id, 'feedbacks', feedback_id, { status, updated_at: new Date().toISOString() })
-        useAlert().openAlert({ type: 'SUCCESS', msg: 'Status Updated' })
+        useAlert().openAlert({ type: 'SUCCESS', msg: 'Status Updated', addrs: 'updateStatus' })
         loading.value = false
     }
 

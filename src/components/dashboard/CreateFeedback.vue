@@ -1,5 +1,5 @@
 <template>
-	<form class="flex flex-col gap-5 bg-light p-7 rounded-md border border-dark w-full max-w-sm" @submit.prevent="create(board_id)">
+	<form class="flex flex-col gap-5 bg-light p-7 rounded-md border border-dark w-full max-w-sm" @submit.prevent="create(board)">
 		<h2 class="font-bold text-2xl mb-8">
 			Let's hear your feedback
 		</h2>
@@ -37,7 +37,14 @@
 <script setup lang="ts">
 import { useCreateFeedback } from '@/composables/board/feedbacks/create'
 
-const board_id = useRoute().params.id as string
+
+
+defineProps({
+	board: {
+		required: true,
+		type: Object
+	}
+})
 
 const { create, createFeedbackForm, loading } = useCreateFeedback()
 </script>

@@ -15,7 +15,7 @@ export const uploadFirebasetorage = () => {
             percentage.value = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         }, (error) => {
             loading.value = false
-            useAlert().openAlert({ type: 'ERROR', msg: error.message })
+            useAlert().openAlert({ type: 'ERROR', msg: error.message, addrs: 'uploadFirebasetorage' })
         }, () => {
             getDownloadURL(uploadTask.snapshot.ref).then((URL) => {
                 loading.value = false
@@ -36,7 +36,7 @@ export const deleteStorageFileByURL = () => {
             loading.value = true
             await deleteObject(storageRef)
         } catch (e:any) {
-            useAlert().openAlert({ type: 'ERROR', msg: e.message })
+            useAlert().openAlert({ type: 'ERROR', msg: e.message, addrs: 'deleteStorageFileByURL' })
         }
         loading.value = false
     }

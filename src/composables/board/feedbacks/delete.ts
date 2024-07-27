@@ -23,10 +23,10 @@ export const useDeleteFeedback = () => {
 			await deleteFirestoreSubCollectionDocument('boards', deleteBoardId.value, 'feedbacks', deleteFeedbackId.value)
 			loading.value = false
 			useConfirmationModal().closeAlert()
-			useAlert().openAlert({ type: 'SUCCESS', msg: 'Feedback Deleted successfully' })
+			useAlert().openAlert({ type: 'SUCCESS', msg: 'Feedback Deleted successfully', addrs: 'deleteFeedback' })
 		} catch (e: any) {
 			loading.value = false
-			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}` })
+			useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'deleteFeedback' })
 		}
 	}
 
