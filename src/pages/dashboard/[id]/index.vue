@@ -10,16 +10,36 @@
 						<div class="field mt-4 items-start gap-4">
 							<label for="link" class="text-lg">Public link</label>
 							<div class="input-field w-full py-4 flex items-center justify-between gap-5">
-								<div class="select-all  text-base w-full" @click="copyBoardLink(board.id)">
-									{{ truncateString(`${host}/b/${board.id}`, 20) }}
+								<div class="select-all  text-base w-full" @click="board.custom_link ? copyBoardLink(board.id, true): copyBoardLink(board.id, false)">
+									{{ truncateString(`${host}/${board.custom_link ? 'c':'b'}/${board.custom_link ? board.custom_link : board.id }`, 20) }}
 								</div>
 
 								<div class="gap-2 flex">
-									<Copy class="cursor-pointer border border-dark p-1 rounded" :size="28" @click="copyBoardLink(board.id)" />
-									<a :href="`http://${host}/b/${board.id}`" target="_blank"><MoveUpRight class="cursor-pointer border border-dark p-1 rounded" :size="28" /></a>
+									<Copy class="cursor-pointer border border-dark p-1 rounded" :size="28" @click="board.custom_link ? copyBoardLink(board.id, true): copyBoardLink(board.id, false)" />
+									<a :href="`http://${host}/${board.custom_link ? 'c':'b'}/${board.custom_link ? board.custom_link : board.id}`" target="_blank"><MoveUpRight class="cursor-pointer border border-dark p-1 rounded" :size="28" /></a>
 								</div>
 							</div>
-							<button class="btn btn-primary w-full gap-2" @click="setDeleteBoardId(board.id)">
+
+							<div class="field relative">
+								<label for="email" class="w-full flex items-center justify-between">
+									Custom link
+									<button :disabled="disabled" class="text-sm btn  py-1 px-3" @click="is_editing ? updateCustomLink(id) : is_editing = true">{{ is_editing ? 'Update' : 'Edit' }}</button>
+
+								</label>
+								<input
+									id="custom_link"
+									v-model="custom_link"
+									:disabled="!is_editing"
+									placeholder="Custom board link"
+									type="text"
+									class="input-field"
+									autocomplete="off"
+									required
+								>
+								<Spinner v-if="editLoading" class="!border-t-dark !border-[#0c030366] absolute right-4 top-11" />
+								<span v-if="!isCustomLinkAvailable && board.custom_link !== custom_link" class="text-rose-500 font-bold">This custom link is taken</span>
+							</div>
+							<button class="btn btn-primary w-full gap-2 mt-12" @click="setDeleteBoardId(board.id)">
 								Delete
 							</button>
 						</div>
@@ -54,9 +74,25 @@ import { useFetchUserBoardById } from '@/composables/board/id'
 import { useCopyToClipboard } from '@/composables/utils/share'
 import { useFetchBoardFeedbacks } from '@/composables/board/feedbacks/fetch'
 import { useDeleteBoard } from '@/composables/board/delete'
+import { useCheckCustomLink, useEditBoard } from '@/composables/board/edit'
 
 
+const { isCustomLinkAvailable } = useCheckCustomLink()
+
+const { updateCustomLink, loading: editLoading, custom_link, is_editing } = useEditBoard()
 const { setDeleteBoardId } = useDeleteBoard()
+
+
+const disabled = computed(() => {
+	if (custom_link.value === board.value.custom_link) {
+		return false
+	}
+	if (is_editing.value) {
+		return !isCustomLinkAvailable.value || editLoading.value
+	} else {
+		return false
+	}
+})
 
 const { feedbacks, fetchBoardFeedbacks, loading: feedbackLoading } = useFetchBoardFeedbacks()
 const { board, fetchUserBoardById, loading } = useFetchUserBoardById()
@@ -66,14 +102,24 @@ const id = useRoute().params.id as string
 fetchBoardFeedbacks(id)
 fetchUserBoardById(id)
 
+onMounted(async () => {
+	fetchBoardFeedbacks(id)
+	await fetchUserBoardById(id)
+	custom_link.value = board.value.custom_link
+})
+
 const host = computed(() => {
 	return location.host
 })
 const { copyData } = useCopyToClipboard()
 
 
-const copyBoardLink = (id: string) => {
-	copyData({ info: `${host.value}/b/${id}`, msg: 'Link copied to clipboard' })
+const copyBoardLink = (id: string, isCustom: boolean) => {
+	if (isCustom) {
+		copyData({ info: `${host.value}/c/${id}`, msg: 'Link copied to clipboard' })
+	} else {
+		copyData({ info: `${host.value}/b/${id}`, msg: 'Link copied to clipboard' })
+	}
 }
 
 

@@ -50,8 +50,9 @@ export const useCreateFeedback = () => {
             const res = await setFirestoreSubDocument('boards', board_id, 'feedbacks', id, sentData)
 
             loading.value = false
+            const type = useRoute().params.type as string
             useAlert().openAlert({ type: 'SUCCESS', msg: 'Feedback Created successfully' })
-            useRouter().push(`/b/${board_id}/${id}`)
+            useRouter().push(`/${type}/${board_id}/${id}`)
             resetForm()
         } catch (e: any) {
             loading.value = false

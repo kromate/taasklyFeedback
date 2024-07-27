@@ -9,13 +9,15 @@ const createBoardForm = {
     title: ref(''),
     desc: ref(''),
     created_at: ref(new Date().toISOString()),
-    updated_at: ref(new Date().toISOString())
+    updated_at: ref(new Date().toISOString()),
+    custom_link: ref('')
 }
 
 
 const resetForm = () => {
     createBoardForm.title.value = ''
     createBoardForm.desc.value = ''
+    createBoardForm.custom_link.value = ''
 }
 
 
@@ -37,7 +39,10 @@ export const useCreateBoard = () => {
             },
             user_id: user_id.value,
             userProfile: userProfile.value
+        } as any
 
+        if (createBoardForm.custom_link) {
+            sentData.custom_link = createBoardForm.custom_link.value
         }
 
         try {
@@ -53,6 +58,8 @@ export const useCreateBoard = () => {
             useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}` })
         }
     }
+
+
 
     return { create, loading, createBoardForm }
 }
