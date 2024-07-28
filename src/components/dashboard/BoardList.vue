@@ -12,7 +12,7 @@
 					<p class="text-sm">
 						{{ board.desc }}
 					</p>
-					<button class="select-all  text-sm italic w-full underline mt-auto text-start" @click.stop="board.custom_link ? copyBoardLink(board.id, true): copyBoardLink(board.id, false)">
+					<button class="select-all  text-sm italic w-full underline mt-auto text-start" @click.stop="board.custom_link ? copyBoardLink(board.custom_link, true): copyBoardLink(board.id, false)">
 						<span class="mt-4">
 							{{ truncateString(`${host}/${board.custom_link ? 'c':'b'}/${board.custom_link ? board.custom_link : board.id }`, 30) }}
 						</span>

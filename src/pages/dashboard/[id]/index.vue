@@ -15,7 +15,7 @@
 								</div>
 
 								<div class="gap-2 flex">
-									<Copy class="cursor-pointer border border-dark p-1 rounded" :size="28" @click="board.custom_link ? copyBoardLink(board.id, true): copyBoardLink(board.id, false)" />
+									<Copy class="cursor-pointer border border-dark p-1 rounded" :size="28" @click="board.custom_link ? copyBoardLink(board.custom_link, true): copyBoardLink(board.id, false)" />
 									<a :href="`http://${host}/${board.custom_link ? 'c':'b'}/${board.custom_link ? board.custom_link : board.id}`" target="_blank"><MoveUpRight class="cursor-pointer border border-dark p-1 rounded" :size="28" /></a>
 								</div>
 							</div>
