@@ -4,12 +4,16 @@ import { getFirestoreCollectionWithWhereQuery } from '@/firebase/firestore/query
 import { useAlert } from '@/composables/core/notification'
 
 const loading = ref(false)
-
 const is_editing = ref(false)
+const isTitleEditing = ref(false)
+const isDescEditing = ref(false)
 
 export const useEditBoard = () => {
     const isCustomLinkAvailable = ref(true)
     const custom_link = ref('')
+    const editedTitle = ref('')
+    const editedDesc = ref('')
+
     const updateCustomLink = (id: string) => {
         if (custom_link.value === '') {
             is_editing.value = false
@@ -44,7 +48,49 @@ export const useEditBoard = () => {
 
 	watchDebounced(custom_link, checkCustomLink, { debounce: 500 })
 
-    return { updateCustomLink, loading, custom_link, is_editing, isCustomLinkAvailable }
+    const updateBoardTitle = async (id: string, newTitle: string) => {
+        if (!newTitle.trim()) return
+
+        try {
+            loading.value = true
+            await updateFirestoreDocument('boards', id, { title: newTitle.trim() })
+            isTitleEditing.value = false
+            useAlert().openAlert({ type: 'SUCCESS', msg: 'Title updated successfully', addrs: 'updateBoardTitle' })
+        } catch (e: any) {
+            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'updateBoardTitle' })
+        } finally {
+            loading.value = false
+        }
+    }
+
+    const updateBoardDesc = async (id: string, newDesc: string) => {
+        if (!newDesc.trim()) return
+
+        try {
+            loading.value = true
+            await updateFirestoreDocument('boards', id, { desc: newDesc.trim() })
+            isDescEditing.value = false
+            useAlert().openAlert({ type: 'SUCCESS', msg: 'Description updated successfully', addrs: 'updateBoardDesc' })
+        } catch (e: any) {
+            useAlert().openAlert({ type: 'ERROR', msg: `Error: ${e.message}`, addrs: 'updateBoardDesc' })
+        } finally {
+            loading.value = false
+        }
+    }
+
+    return {
+        updateCustomLink,
+        loading,
+        custom_link,
+        is_editing,
+        isCustomLinkAvailable,
+        isTitleEditing,
+        isDescEditing,
+        editedTitle,
+        editedDesc,
+        updateBoardTitle,
+        updateBoardDesc
+    }
 }
 
 

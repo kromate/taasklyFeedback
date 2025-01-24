@@ -5,8 +5,40 @@
 				<h1 class="flex flex-col md:flex-row items-start gap-4 w-full max-w-full">
 					<Undo2 class="border border-dark p-1 rounded-md cursor-pointer !min-w-[32px] !max-h-[32px] hover:btn_shadow transite " :size="32" @click="useRouter().back()" />
 					<div class="flex flex-col">
-						<span class="text-3xl font-bold">{{ board.title }}</span>
-						<span class="text-base ">{{ board.desc }}</span>
+						<div class="flex flex-col">
+							<div class="flex items-center justify-between gap-2">
+								<span v-if="!isTitleEditing" class="text-3xl font-bold cursor-pointer flex items-center gap-2" @click="startTitleEdit">
+									{{ board.title }}
+									<Pencil class="w-5 h-5 hover:scale-110 transition-transform" />
+								</span>
+								<div v-else class="flex items-center gap-2 w-full">
+									<input
+										ref="titleInput"
+										v-model="editedTitle"
+										class="text-3xl font-bold input-field py-1"
+										@keyup.enter="handleTitleUpdate"
+										@blur="handleTitleUpdate"
+									>
+									<Save class="w-5 h-5 cursor-pointer hover:scale-110 transition-transform" @click="handleTitleUpdate" />
+								</div>
+							</div>
+							<div class="flex items-center justify-between gap-2">
+								<span v-if="!isDescEditing" class="text-base cursor-pointer flex items-center gap-2" @click="startDescEdit">
+									{{ board.desc }}
+									<Pencil class="w-4 h-4 hover:scale-110 transition-transform" />
+								</span>
+								<div v-else class="flex items-center gap-2 w-full">
+									<input
+										ref="descInput"
+										v-model="editedDesc"
+										class="text-base input-field py-1"
+										@keyup.enter="handleDescUpdate"
+										@blur="handleDescUpdate"
+									>
+									<Save class="w-4 h-4 cursor-pointer hover:scale-110 transition-transform" @click="handleDescUpdate" />
+								</div>
+							</div>
+						</div>
 						<div class="field mt-4 items-start gap-4">
 							<label for="link" class="text-lg">Public link</label>
 							<div class="input-field w-full py-4 flex items-center justify-between gap-5">
@@ -68,7 +100,7 @@
 </template>
 
 <script setup lang="ts">
-import { Copy, Undo2, MoveUpRight, PenLine } from 'lucide-vue-next'
+import { Copy, Undo2, MoveUpRight, PenLine, Pencil, Save } from 'lucide-vue-next'
 import { truncateString } from '@/composables/utils/formatter'
 import { useFetchUserDoashboardBoardById } from '@/composables/board/id'
 import { useCopyToClipboard } from '@/composables/utils/share'
@@ -79,7 +111,57 @@ import { useEditBoard } from '@/composables/board/edit'
 
 
 
-const { updateCustomLink, loading: editLoading, custom_link, is_editing, isCustomLinkAvailable } = useEditBoard()
+const {
+  updateCustomLink,
+  loading: editLoading,
+  custom_link,
+  is_editing,
+  isCustomLinkAvailable,
+  isTitleEditing,
+  isDescEditing,
+  editedTitle,
+  editedDesc,
+  updateBoardTitle,
+  updateBoardDesc
+} = useEditBoard()
+
+// Add these new functions
+const startTitleEdit = () => {
+  editedTitle.value = board.value.title
+  isTitleEditing.value = true
+  nextTick(() => {
+    titleInput.value?.focus()
+  })
+}
+
+const startDescEdit = () => {
+  editedDesc.value = board.value.desc
+  isDescEditing.value = true
+  nextTick(() => {
+    descInput.value?.focus()
+  })
+}
+
+const handleTitleUpdate = async () => {
+  if (editedTitle.value !== board.value.title) {
+    await updateBoardTitle(id, editedTitle.value)
+    board.value.title = editedTitle.value.trim()
+  }
+  isTitleEditing.value = false
+}
+
+const handleDescUpdate = async () => {
+  if (editedDesc.value !== board.value.desc) {
+    await updateBoardDesc(id, editedDesc.value)
+    board.value.desc = editedDesc.value.trim()
+  }
+  isDescEditing.value = false
+}
+
+// Add these refs for input focus
+const titleInput = ref<HTMLInputElement | null>(null)
+const descInput = ref<HTMLInputElement | null>(null)
+
 const { setDeleteBoardId } = useDeleteBoard()
 
 
@@ -136,5 +218,14 @@ definePageMeta({
 </script>
 
 <style scoped>
+.input-field {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  outline: none;
+}
 
+.input-field:focus {
+  border-color: #000;
+}
 </style>
